@@ -9,11 +9,13 @@ extends CharacterBody2D
 #endregion Enums
 
 #region Constants
+## TODO
+const MOVEMENT_SPEED : float = 1080.0
+## TODO
+const ROTATION_SPEED : float = deg_to_rad(480.0)
 #endregion Constants
 
 #region Exports Variables
-@export var movement_speed : float = 1080.0 
-@export var rotation_speed : float = deg_to_rad(480.0)
 #endregion Exports Variables
 
 #region Public Variables
@@ -31,12 +33,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move_left"):
-		rotate(-rotation_speed * delta)
+		rotate(-ROTATION_SPEED * delta)
 	if Input.is_action_pressed("move_right"):
-		rotate(rotation_speed * delta)
+		rotate(ROTATION_SPEED * delta)
 	
 	var local_up_vector = global_transform.basis_xform(Vector2.UP)
-	velocity = local_up_vector * movement_speed
+	velocity = local_up_vector * MOVEMENT_SPEED
 	
 	move_and_slide()
 	

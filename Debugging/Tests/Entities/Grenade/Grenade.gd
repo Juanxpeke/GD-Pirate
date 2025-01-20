@@ -70,7 +70,7 @@ func _input(event: InputEvent) -> void:
 			var collision_distance : float = gauge_ray.get_collision_point().distance_to(global_position)
 			var collision_offset : float = collision_distance - collision_shape.shape.radius
 			var impulse_magnitude_factor : float = offset_impulse_factor_curve.sample(collision_offset / MAX_COLLISION_OFFSET_FOR_IMPULSE)
-			print("FACTOR: ", impulse_magnitude_factor)
+
 			apply_impulse(impulse_direction * impulse_magnitude_factor * BASE_IMPULSE_MAGNITUDE)
 #endregion Built-in Virtual Methods
 
