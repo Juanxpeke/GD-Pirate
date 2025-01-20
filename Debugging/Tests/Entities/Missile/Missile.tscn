@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dahtqvghed5lb"]
+
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="1_d2qno"]
+[ext_resource type="Script" path="res://Debugging/Tests/Entities/Missile/Missile.gd" id="1_kvpbe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ad0cl"]
+size = Vector2(36, 36)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tds7p"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 9.0
+initial_velocity_min = 120.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+
+[node name="Missile" type="CharacterBody2D"]
+script = ExtResource("1_kvpbe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_d2qno")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ad0cl")
+
+[node name="GPUParticles" type="GPUParticles2D" parent="."]
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_tds7p")
+lifetime = 0.6
+randomness = 0.2
