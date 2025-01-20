@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwsq7gp4io3cn"]
 
-[ext_resource type="PackedScene" uid="uid://dahtqvghed5lb" path="res://Debugging/Tests/Entities/Missile/Missile.tscn" id="1_yjqem"]
-[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_qw4ig"]
+[ext_resource type="PackedScene" uid="uid://dahtqvghed5lb" path="res://Debugging/Tests/Entities/Missile/Missile.tscn" id="1_qpkfk"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_pc3c2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6ry1"]
 size = Vector2(600, 40)
@@ -11,7 +11,7 @@ size = Vector2(600, 40)
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="Missile" parent="." instance=ExtResource("1_yjqem")]
+[node name="Missile" parent="." instance=ExtResource("1_qpkfk")]
 position = Vector2(555, 536)
 
 [node name="Floor" type="StaticBody2D" parent="."]
@@ -24,4 +24,4 @@ shape = SubResource("RectangleShape2D_w6ry1")
 [node name="Sprite" type="Sprite2D" parent="Floor"]
 position = Vector2(-2, -9.53674e-07)
 scale = Vector2(4.70313, 0.3125)
-texture = ExtResource("2_qw4ig")
+texture = ExtResource("2_pc3c2")

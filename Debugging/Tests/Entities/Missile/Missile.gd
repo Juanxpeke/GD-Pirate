@@ -1,3 +1,4 @@
+class_name Missile
 extends CharacterBody2D
 ## Docstring
 
@@ -11,8 +12,8 @@ extends CharacterBody2D
 #endregion Constants
 
 #region Exports Variables
-@export var movement_speed : float = 900.0 
-@export var rotation_speed : float = deg_to_rad(360.0)
+@export var movement_speed : float = 1080.0 
+@export var rotation_speed : float = deg_to_rad(480.0)
 #endregion Exports Variables
 
 #region Public Variables
