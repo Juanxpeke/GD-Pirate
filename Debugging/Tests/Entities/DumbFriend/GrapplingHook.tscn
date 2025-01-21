@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4c2k5w488n1d"]
+[gd_scene load_steps=5 format=3 uid="uid://c4c2k5w488n1d"]
 
 [ext_resource type="Script" path="res://Debugging/Tests/Entities/DumbFriend/GrapplingHook.gd" id="1_6swxw"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_k8dvy"]
+[ext_resource type="Shader" path="res://Debugging/Tests/Entities/DumbFriend/GrapplingHook.gdshader" id="3_wf8xg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76y87"]
+shader = ExtResource("3_wf8xg")
 
 [node name="GrapplingHook" type="Node2D"]
 script = ExtResource("1_6swxw")
@@ -13,4 +17,13 @@ target_position = Vector2(500, 0)
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(16.5, -2.5)
 scale = Vector2(0.320313, 0.164063)
+texture = ExtResource("2_k8dvy")
+
+[node name="Separator" type="Node" parent="."]
+
+[node name="Pointer" type="Sprite2D" parent="Separator"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_76y87")
+position = Vector2(100, 0)
+scale = Vector2(0.08, 0.08)
 texture = ExtResource("2_k8dvy")
