@@ -8,15 +8,25 @@ extends CharacterBody2D
 #region Enums
 enum CharacterKey {
 	GO_LEFT,
-	GO_RIGHT
+	GO_RIGHT,
+	JUMP,
+	STOMP
 }
 #endregion Enums
 
 #region Constants
 ## TODO
-const MOVEMENT_SPEED = 720.0
+const MOVEMENT_ACCELERATION_ON_FLOOR = 720.0
+## TODO
+const MOVEMENT_ACCELERATION_ON_AIR = 800.0
 ## TODO
 const MAX_MOVEMENT_SPEED_ON_FLOOR = 500.0
+## TODO
+const MAX_MOVEMENT_SPEED_ON_AIR = 1000.0
+## TODO
+const MIN_RANDOM_KEY_TIME : float = 1.0
+## TODO
+const MAX_RANDOM_KEY_TIME : float = 4.0
 ## TODO
 const JUMP_SPEED = -400.0
 #endregion Constants
@@ -28,6 +38,7 @@ const JUMP_SPEED = -400.0
 #endregion Public Variables
 
 #region Private Variables
+var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var _character_keys_pool = [CharacterKey.GO_LEFT, CharacterKey.GO_RIGHT]
 var _character_key : CharacterKey = CharacterKey.GO_LEFT
 #endregion Private Variables
@@ -39,7 +50,11 @@ var _character_key : CharacterKey = CharacterKey.GO_LEFT
 
 #region Built-in Virtual Methods
 func _ready() -> void:
+	_rng.randomize()
+	
 	random_key_timer.timeout.connect(_on_random_key_timer_timeout)
+	
+	random_key_timer.start(_rng.randf_range(MIN_RANDOM_KEY_TIME, MAX_RANDOM_KEY_TIME))
 
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_global_mouse_position()
@@ -57,8 +72,12 @@ func _physics_process(delta: float) -> void:
 		CharacterKey.GO_RIGHT:
 			movement_direction = Vector2.RIGHT
 	
-	velocity += movement_direction * MOVEMENT_SPEED * delta
-	velocity.x = clamp(velocity.x, -MAX_MOVEMENT_SPEED_ON_FLOOR, MAX_MOVEMENT_SPEED_ON_FLOOR)
+	if is_on_floor():
+		velocity += movement_direction * MOVEMENT_ACCELERATION_ON_FLOOR * delta
+		velocity.x = clamp(velocity.x, -MAX_MOVEMENT_SPEED_ON_FLOOR, MAX_MOVEMENT_SPEED_ON_FLOOR)
+	else:
+		velocity += movement_direction * MOVEMENT_ACCELERATION_ON_AIR * delta
+		velocity.x = clamp(velocity.x, -MAX_MOVEMENT_SPEED_ON_AIR, MAX_MOVEMENT_SPEED_ON_AIR)
 
 	move_and_slide()
 #endregion Built-in Virtual Methods
@@ -70,6 +89,9 @@ func _physics_process(delta: float) -> void:
 #region Callbacks
 func _on_random_key_timer_timeout() -> void:
 	_set_new_character_key()
+	
+	var time := _rng.randf_range(MIN_RANDOM_KEY_TIME, MAX_RANDOM_KEY_TIME)
+	random_key_timer.start(time)
 #endregion Callbacks
 
 func _set_new_character_key() -> void:

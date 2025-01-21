@@ -28,5 +28,4 @@ character = NodePath("../..")
 
 [node name="RandomKeyTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 2.0
-autostart = true
+one_shot = true
