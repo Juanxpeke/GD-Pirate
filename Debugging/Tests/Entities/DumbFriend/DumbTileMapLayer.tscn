@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://84qq6jrv5d6p"]
+[gd_scene load_steps=3 format=3 uid="uid://84qq6jrv5d6p"]
 
 [ext_resource type="TileSet" uid="uid://crf6ije2nv57g" path="res://Debugging/Tests/Entities/DumbFriend/DumbTileSet.tres" id="1_seuxk"]
+[ext_resource type="Script" path="res://Debugging/Tests/Entities/DumbFriend/DumpTileMapLayer.gd" id="2_ivj3f"]
 
 [node name="DumbTileMapLayer" type="TileMapLayer"]
 tile_set = ExtResource("1_seuxk")
+script = ExtResource("2_ivj3f")
