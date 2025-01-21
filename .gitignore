@@ -6,7 +6,10 @@
 .godot/
 /android/
 
-# Windows temporal files bug ignore
+# Krita temporary files
+*.kra~
+
+# Windows temporary files bug ignore
 **/*.tmp
 
 # Visual Studio Code

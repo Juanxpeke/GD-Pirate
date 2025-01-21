@@ -18,11 +18,13 @@ enum CharacterKey {
 
 #region Constants
 ## TODO
-const INITIAL_IDLE_TIME : float = 2.0
+const INITIAL_IDLE_TIME : float = 211.0
 ## TODO
-const MOVEMENT_ACCELERATION_ON_FLOOR : float = 720.0
+const HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR : float = 720.0
 ## TODO
-const MOVEMENT_ACCELERATION_ON_AIR : float = 800.0
+const HORIZONTAL_MOVEMENT_FRICTION_ON_FLOOR : float = 1280.0
+## TODO
+const HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR : float = 800.0
 ## TODO
 const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR : float = 500.0
 ## TODO
@@ -34,15 +36,18 @@ const MAX_RANDOM_KEY_TIME : float = 4.0
 ## TODO
 const STOMP_ACCELERATION : float = 4000.0
 ## TODO
-const KEYS_DATA = {
+const CHARACTER_KEYS_DATA = {
 	CharacterKey.GO_LEFT : {
-		"name": "A"
+		"name": "A",
+		"weight": 1.0
 	},
 	CharacterKey.GO_RIGHT : {
-		"name": "D"
+		"name": "D",
+		"weight": 1.0
 	},
 	CharacterKey.STOMP : {
-		"name": "S"
+		"name": "S",
+		"weight": 0.2
 	}
 }
 #endregion Constants
@@ -84,18 +89,19 @@ func _physics_process(delta: float) -> void:
 			horizontal_movement_direction = Vector2.RIGHT
 	
 	if is_on_floor():
-		velocity += horizontal_movement_direction * MOVEMENT_ACCELERATION_ON_FLOOR * delta
+		velocity += horizontal_movement_direction * HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR * delta
 		velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR, MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR)
+		if abs(velocity.x) > 0.0 and horizontal_movement_direction == Vector2.ZERO:
+			velocity.x = move_toward(velocity.x, 0.0, HORIZONTAL_MOVEMENT_FRICTION_ON_FLOOR * delta)
 	else:
-		velocity += horizontal_movement_direction * MOVEMENT_ACCELERATION_ON_AIR * delta
+		velocity += horizontal_movement_direction * HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR * delta
 		velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR, MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR)
 	
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-		
-		if _character_key == CharacterKey.STOMP:
-			velocity.x = 0
-			velocity.y += STOMP_ACCELERATION * delta
+	velocity += get_gravity() * delta
+	
+	if _character_key == CharacterKey.STOMP:
+		velocity.x = 0
+		velocity.y += STOMP_ACCELERATION * delta
 	
 	move_and_slide()
 #endregion Built-in Virtual Methods
@@ -121,14 +127,23 @@ func _initial_setup() -> void:
 	_set_new_character_key(false)
 #endregion Initialization
 func _set_new_character_key(exclude_current : bool = true) -> void:
-	var _pool_copy = _character_keys_pool.duplicate()
-	
+	var pool_copy := _character_keys_pool.duplicate()
 	if exclude_current:
-		_pool_copy.erase(_character_key)
+		pool_copy.erase(_character_key)
+
+	var pool_keys_total_weight := 0.0
+	for key in pool_copy:
+		pool_keys_total_weight += CHARACTER_KEYS_DATA[key].weight
+
+	var random_weight := _rng.randf_range(0.0, pool_keys_total_weight)
 	
-	_character_key = _pool_copy.pick_random()
+	for key in pool_copy:
+		_character_key = key
+		random_weight -= CHARACTER_KEYS_DATA[key].weight
+		if random_weight < 0.0:
+			break
 	
-	_random_key_label.text = KEYS_DATA[_character_key].name
+	_random_key_label.text = CHARACTER_KEYS_DATA[_character_key].name
 	
 	_random_key_timer.start(_rng.randf_range(MIN_RANDOM_KEY_TIME, MAX_RANDOM_KEY_TIME))
 #endregion Private Methods
