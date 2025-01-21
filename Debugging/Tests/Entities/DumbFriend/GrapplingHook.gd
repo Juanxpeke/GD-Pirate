@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 		var impulse_vector := collision_point - character.global_position
 		var impulse_direction := impulse_vector.normalized()
 		
-		character.velocity = impulse_direction * hook_impulse_magnitude
+		character.velocity += impulse_direction * hook_impulse_magnitude
 #endregion Built-in Virtual Methods
 
 #region Public Methods
