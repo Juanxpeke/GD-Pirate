@@ -24,15 +24,15 @@ const MOVEMENT_ACCELERATION_ON_FLOOR : float = 720.0
 ## TODO
 const MOVEMENT_ACCELERATION_ON_AIR : float = 800.0
 ## TODO
-const MAX_MOVEMENT_SPEED_ON_FLOOR : float = 500.0
+const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR : float = 500.0
 ## TODO
-const MAX_MOVEMENT_SPEED_ON_AIR : float = 1000.0
+const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR : float = 1000.0
 ## TODO
 const MIN_RANDOM_KEY_TIME : float = 1.0
 ## TODO
 const MAX_RANDOM_KEY_TIME : float = 4.0
 ## TODO
-const JUMP_SPEED = -400.0
+const STOMP_ACCELERATION : float = 4000.0
 ## TODO
 const KEYS_DATA = {
 	CharacterKey.GO_LEFT : {
@@ -40,6 +40,9 @@ const KEYS_DATA = {
 	},
 	CharacterKey.GO_RIGHT : {
 		"name": "D"
+	},
+	CharacterKey.STOMP : {
+		"name": "S"
 	}
 }
 #endregion Constants
@@ -52,7 +55,7 @@ const KEYS_DATA = {
 
 #region Private Variables
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var _character_keys_pool = [CharacterKey.GO_LEFT, CharacterKey.GO_RIGHT]
+var _character_keys_pool = [CharacterKey.GO_LEFT, CharacterKey.GO_RIGHT, CharacterKey.STOMP]
 var _character_key : CharacterKey = CharacterKey.NONE
 #endregion Private Variables
 
@@ -73,23 +76,27 @@ func _physics_process(delta: float) -> void:
 	
 	_grappling_hook_pivot.rotation = mouse_direction.angle()
 	
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	
-	var movement_direction = Vector2.ZERO
+	var horizontal_movement_direction = Vector2.ZERO
 	match _character_key:
 		CharacterKey.GO_LEFT:
-			movement_direction = Vector2.LEFT
+			horizontal_movement_direction = Vector2.LEFT
 		CharacterKey.GO_RIGHT:
-			movement_direction = Vector2.RIGHT
+			horizontal_movement_direction = Vector2.RIGHT
 	
 	if is_on_floor():
-		velocity += movement_direction * MOVEMENT_ACCELERATION_ON_FLOOR * delta
-		velocity.x = clamp(velocity.x, -MAX_MOVEMENT_SPEED_ON_FLOOR, MAX_MOVEMENT_SPEED_ON_FLOOR)
+		velocity += horizontal_movement_direction * MOVEMENT_ACCELERATION_ON_FLOOR * delta
+		velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR, MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR)
 	else:
-		velocity += movement_direction * MOVEMENT_ACCELERATION_ON_AIR * delta
-		velocity.x = clamp(velocity.x, -MAX_MOVEMENT_SPEED_ON_AIR, MAX_MOVEMENT_SPEED_ON_AIR)
-
+		velocity += horizontal_movement_direction * MOVEMENT_ACCELERATION_ON_AIR * delta
+		velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR, MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR)
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+		if _character_key == CharacterKey.STOMP:
+			velocity.x = 0
+			velocity.y += STOMP_ACCELERATION * delta
+	
 	move_and_slide()
 #endregion Built-in Virtual Methods
 
