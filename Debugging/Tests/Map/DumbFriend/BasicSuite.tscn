@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://csqii01ea7q7t"]
+
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="1_2ltqe"]
+[ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Debugging/Tests/Entities/DumbFriend/DumbFriend.tscn" id="2_db3tq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gg47c"]
+size = Vector2(800, 20)
+
+[node name="BasicSuite" type="Node2D"]
+
+[node name="Floors" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Floors"]
+position = Vector2(572, 637)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Floors/Floor"]
+shape = SubResource("RectangleShape2D_gg47c")
+
+[node name="Sprite" type="Sprite2D" parent="Floors/Floor"]
+position = Vector2(0.5, 0)
+scale = Vector2(6.25781, 0.171875)
+texture = ExtResource("1_2ltqe")
+
+[node name="Floor2" type="StaticBody2D" parent="Floors"]
+position = Vector2(301, 397)
+scale = Vector2(0.440001, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Floors/Floor2"]
+shape = SubResource("RectangleShape2D_gg47c")
+
+[node name="Sprite" type="Sprite2D" parent="Floors/Floor2"]
+position = Vector2(0.5, 0)
+scale = Vector2(6.25781, 0.171875)
+texture = ExtResource("1_2ltqe")
+
+[node name="Floor3" type="StaticBody2D" parent="Floors"]
+position = Vector2(800, 235)
+scale = Vector2(0.440001, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Floors/Floor3"]
+shape = SubResource("RectangleShape2D_gg47c")
+
+[node name="Sprite" type="Sprite2D" parent="Floors/Floor3"]
+position = Vector2(0.5, 0)
+scale = Vector2(6.25781, 0.171875)
+texture = ExtResource("1_2ltqe")
+
+[node name="DumbFriend" parent="." instance=ExtResource("2_db3tq")]
+position = Vector2(570, 581)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://t22dmgoo0oxx"]
+
+[ext_resource type="Script" path="res://Debugging/Tests/Entities/DumbFriend/DumbFriend.gd" id="1_sur7k"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_820ae"]
+[ext_resource type="PackedScene" uid="uid://c4c2k5w488n1d" path="res://Debugging/Tests/Entities/DumbFriend/GrapplingHook.tscn" id="3_jfa0e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dnf3o"]
+radius = 16.0
+height = 80.0
+
+[node name="DumbFriend" type="CharacterBody2D"]
+script = ExtResource("1_sur7k")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_dnf3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0.999996)
+scale = Vector2(0.25, 0.625)
+texture = ExtResource("2_820ae")
+
+[node name="GrapplingHookPivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="GrapplingHook" parent="GrapplingHookPivot" node_paths=PackedStringArray("character") instance=ExtResource("3_jfa0e")]
+position = Vector2(30, 0)
+character = NodePath("../..")
+
+[node name="RandomKeyTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+autostart = true

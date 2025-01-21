@@ -1,15 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://dq14bk1nd2pfc"]
 
-[ext_resource type="Script" path="res://Debugging/Tests/Entities/Grenade/Grenade.gd" id="1_3aq4n"]
+[ext_resource type="Script" path="res://Debugging/Tests/Entities/SuperWeapons/Grenade/Grenade.gd" id="1_3aq4n"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_3pju2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_woy1r"]
 friction = 0.2
-bounce = 0.36
+bounce = 0.6
 
 [sub_resource type="Curve" id="Curve_43mxd"]
-_data = [Vector2(0, 1), 0.0, -3.3161, 0, 0, Vector2(1, 0), -0.12654, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.78191, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iqdfu"]
 

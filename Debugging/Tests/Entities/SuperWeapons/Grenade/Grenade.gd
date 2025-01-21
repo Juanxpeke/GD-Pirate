@@ -18,6 +18,8 @@ const MAX_ANGLE_BETWEEN_CONTACT_AND_IMPULSE : float = deg_to_rad(60)
 ## TODO
 const BASE_IMPULSE_MAGNITUDE : float = 240.0
 ## TODO
+const MAX_MOVEMENT_SPEED : float = 100.0
+## TODO
 const GAUGE_ROTATION_SPEED : float = deg_to_rad(640.0)
 #endregion Constants
 
@@ -70,7 +72,9 @@ func _input(event: InputEvent) -> void:
 			var collision_distance : float = gauge_ray.get_collision_point().distance_to(global_position)
 			var collision_offset : float = collision_distance - collision_shape.shape.radius
 			var impulse_magnitude_factor : float = offset_impulse_factor_curve.sample(collision_offset / MAX_COLLISION_OFFSET_FOR_IMPULSE)
-
+			
+			if abs(linear_velocity.angle_to(impulse_direction)) > abs(deg_to_rad(135)):
+				linear_velocity = Vector2.ZERO
 			apply_impulse(impulse_direction * impulse_magnitude_factor * BASE_IMPULSE_MAGNITUDE)
 #endregion Built-in Virtual Methods
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dahtqvghed5lb"]
 
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="1_d2qno"]
-[ext_resource type="Script" path="res://Debugging/Tests/Entities/Missile/Missile.gd" id="1_kvpbe"]
+[ext_resource type="Script" path="res://Debugging/Tests/Entities/SuperWeapons/Missile/Missile.gd" id="1_kvpbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ad0cl"]
 size = Vector2(36, 36)
