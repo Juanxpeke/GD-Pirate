@@ -12,7 +12,7 @@ extends Node2D
 
 #region Exports Variables
 @export var character : CharacterBody2D = null
-@export var hook_impulse_magnitude : float = 960.0
+@export var hook_impulse_magnitude : float = 1800.0
 #endregion Exports Variables
 
 #region Public Variables

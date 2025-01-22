@@ -28,30 +28,42 @@ const HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR : float = 800.0
 ## TODO
 const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR : float = 500.0
 ## TODO
-const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR : float = 1000.0
+const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR : float = 800.0
 ## TODO
-const MAX_VERTICAL_MOVEMENT_SPEED : float = 2000.0
+const MAX_VERTICAL_MOVEMENT_SPEED : float = 1800.0
+## TODO
+const STOMP_HORIZONTAL_FRICTION : float = 2000.0
+## TODO
+const STOMP_VERTICAL_ACCELERATION : float = 3200.0
 ## TODO
 const MIN_RANDOM_KEY_TIME : float = 1.0
 ## TODO
 const MAX_RANDOM_KEY_TIME : float = 4.0
 ## TODO
-const STOMP_HORIZONTAL_FRICTION : float = 2000.0
-## TODO
-const STOMP_VERTICAL_ACCELERATION : float = 4000.0
-## TODO
 const CHARACTER_KEYS_DATA = {
+	CharacterKey.NONE : {
+		"name": "",
+		"weight": 0.4,
+		"min_time": MIN_RANDOM_KEY_TIME,
+		"max_time": MAX_RANDOM_KEY_TIME,
+	},
 	CharacterKey.GO_LEFT : {
 		"name": "A",
-		"weight": 1.0
+		"weight": 0.0,
+		"min_time": MIN_RANDOM_KEY_TIME,
+		"max_time": MAX_RANDOM_KEY_TIME,
 	},
 	CharacterKey.GO_RIGHT : {
 		"name": "D",
-		"weight": 1.0
+		"weight": 0.0,
+		"min_time": MIN_RANDOM_KEY_TIME,
+		"max_time": MAX_RANDOM_KEY_TIME,
 	},
 	CharacterKey.STOMP : {
 		"name": "S",
-		"weight": 0.2
+		"weight": 0.2,
+		"min_time": 0,
+		"max_time": 0.1,
 	}
 }
 #endregion Constants
@@ -64,7 +76,7 @@ const CHARACTER_KEYS_DATA = {
 
 #region Private Variables
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var _character_keys_pool = [CharacterKey.GO_LEFT, CharacterKey.GO_RIGHT, CharacterKey.STOMP]
+var _character_keys_pool = [CharacterKey.NONE, CharacterKey.GO_LEFT, CharacterKey.GO_RIGHT, CharacterKey.STOMP]
 var _character_key : CharacterKey = CharacterKey.NONE
 #endregion Private Variables
 
@@ -148,7 +160,7 @@ func _initial_setup() -> void:
 	var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
 	await timer.timeout
 	
-	_set_new_character_key(false)
+	_set_new_character_key()
 #endregion Initialization
 func _set_new_character_key(exclude_current : bool = true) -> void:
 	var pool_copy := _character_keys_pool.duplicate()
@@ -174,5 +186,7 @@ func _set_new_character_key(exclude_current : bool = true) -> void:
 	else:
 		_stomp_area.monitoring = false
 	
-	_random_key_timer.start(_rng.randf_range(MIN_RANDOM_KEY_TIME, MAX_RANDOM_KEY_TIME))
+	var min_time : float = CHARACTER_KEYS_DATA[_character_key].min_time
+	var max_time : float = CHARACTER_KEYS_DATA[_character_key].max_time
+	_random_key_timer.start(_rng.randf_range(min_time, max_time))
 #endregion Private Methods
