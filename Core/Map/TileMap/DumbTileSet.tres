@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://crf6ije2nv57g"]
 
-[ext_resource type="Texture2D" uid="uid://cvw14p804wr3l" path="res://Debugging/Tests/Entities/DumbFriend/DumbTileSet.png" id="1_12c22"]
+[ext_resource type="Texture2D" uid="uid://cvw14p804wr3l" path="res://Core/Map/TileMap/DumbTileSet.png" id="1_12c22"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u10qv"]
 resource_name = "Base Atlas"

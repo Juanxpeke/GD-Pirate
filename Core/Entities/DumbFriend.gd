@@ -20,11 +20,11 @@ enum CharacterKey {
 ## TODO
 const INITIAL_IDLE_TIME : float = 2.0
 ## TODO
-const HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR : float = 720.0
+const HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR : float = 2160.0
 ## TODO
 const HORIZONTAL_MOVEMENT_FRICTION_ON_FLOOR : float = 1280.0
 ## TODO
-const HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR : float = 800.0
+const HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR : float = 2160.0
 ## TODO
 const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR : float = 500.0
 ## TODO
@@ -43,27 +43,27 @@ const MAX_RANDOM_KEY_TIME : float = 4.0
 const CHARACTER_KEYS_DATA = {
 	CharacterKey.NONE : {
 		"name": "",
-		"weight": 0.4,
+		"weight": 0.1,
 		"min_time": MIN_RANDOM_KEY_TIME,
 		"max_time": MAX_RANDOM_KEY_TIME,
 	},
 	CharacterKey.GO_LEFT : {
 		"name": "A",
-		"weight": 0.0,
+		"weight": 1.0,
 		"min_time": MIN_RANDOM_KEY_TIME,
 		"max_time": MAX_RANDOM_KEY_TIME,
 	},
 	CharacterKey.GO_RIGHT : {
 		"name": "D",
-		"weight": 0.0,
+		"weight": 1.0,
 		"min_time": MIN_RANDOM_KEY_TIME,
 		"max_time": MAX_RANDOM_KEY_TIME,
 	},
 	CharacterKey.STOMP : {
 		"name": "S",
-		"weight": 0.2,
-		"min_time": 0,
-		"max_time": 0.1,
+		"weight": 0.002,
+		"min_time": MIN_RANDOM_KEY_TIME,
+		"max_time": MAX_RANDOM_KEY_TIME,
 	}
 }
 #endregion Constants
@@ -81,10 +81,9 @@ var _character_key : CharacterKey = CharacterKey.NONE
 #endregion Private Variables
 
 #region On Ready Variables
-@onready var _grappling_hook_pivot : Node2D = %GrapplingHookPivot
-@onready var _stomp_area           : Area2D = %StompArea
-@onready var _random_key_timer     : Timer  = %RandomKeyTimer
-@onready var _random_key_label     : Label  = %RandomKeyLabel
+@onready var _stomp_area           : Area2D        = %StompArea
+@onready var _random_key_timer     : Timer         = %RandomKeyTimer
+@onready var _random_key_label     : Label         = %RandomKeyLabel
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
@@ -94,10 +93,6 @@ func _ready() -> void:
 	_initial_setup()
 
 func _physics_process(delta: float) -> void:
-	var mouse_position := get_global_mouse_position()
-	var mouse_direction := mouse_position - global_position
-	
-	_grappling_hook_pivot.rotation = mouse_direction.angle()
 	
 	var horizontal_movement_direction = Vector2.ZERO
 	match _character_key:

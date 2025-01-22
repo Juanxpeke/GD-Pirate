@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4c2k5w488n1d"]
 
-[ext_resource type="Script" path="res://Debugging/Tests/Entities/DumbFriend/GrapplingHook.gd" id="1_6swxw"]
+[ext_resource type="Script" path="res://Core/Entities/GrapplingHook.gd" id="1_6swxw"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_k8dvy"]
-[ext_resource type="Shader" path="res://Debugging/Tests/Entities/DumbFriend/GrapplingHook.gdshader" id="3_wf8xg"]
+[ext_resource type="Shader" path="res://Core/Entities/GrapplingHook.gdshader" id="3_wf8xg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76y87"]
 shader = ExtResource("3_wf8xg")
