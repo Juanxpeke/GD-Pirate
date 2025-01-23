@@ -22,15 +22,13 @@ const MAX_HOLD_IMPULSE_SPEED : float = 1280.0
 ## TODO
 const HOLD_IMPULSE_ACCELERATION_FACTOR : float = 16.0
 ## TODO
-const CAMERA_AUTO_UNZOOM_OFFSET : Vector2 = Vector2(64.0, 64.0)
+const CAMERA_UNZOOM_OFFSET : Vector2 = Vector2(64.0, 64.0)
 ## TODO
-const CAMERA_AUTO_UNZOOM_SPEED_FACTOR : float = 10.0
+const CAMERA_UNZOOM_SPEED_FACTOR : float = 16.0
 ## TODO
-const CAMERA_AUTO_UNZOOM_ACTIVATION_TIME : float = 0.2
+const CAMERA_DEFAULT_ZOOM_SPEED_FACTOR : float = 0.8
 ## TODO
-const CAMERA_AUTO_ZOOM_SPEED_FACTOR : float = 1.0
-## TODO
-const CAMERA_AUTO_ZOOM_ACTIVATION_TIME : float = 2.0
+const CAMERA_DEFAULT_ZOOM_ACTIVATION_TIME : float = 1.2
 #endregion Constants
 
 #region Exports Variables
@@ -53,7 +51,11 @@ var holding_point : Vector2 = Vector2.ZERO
 
 #region Private Variables
 var _holding_time : float = 0.0
+
 var _default_camera_zoom : Vector2 = Vector2.ZERO
+var _unzoom_camera_zoom : Vector2 = Vector2.ZERO
+
+var _default_zoom_needed_time : float = 0.0
 #endregion Private Variables
 
 #region On Ready Variables
@@ -99,24 +101,33 @@ func _physics_process(delta: float) -> void:
 			_pointer.hide()
 		
 	if camera:
-		var zoom_weight := minf(CAMERA_AUTO_ZOOM_SPEED_FACTOR * delta, 1.0)
-		var unzoom_weight := minf(CAMERA_AUTO_UNZOOM_SPEED_FACTOR * delta, 1.0)
+		var unzoom_needed := false
+		
 		if _pointer.visible:
 			var default_camera_size := camera.get_viewport_rect().size / _default_camera_zoom
 			var default_camera_rect := Rect2(camera.get_screen_center_position() - default_camera_size * 0.5, default_camera_size)
 			if not default_camera_rect.has_point(_pointer.global_position):
-				var desired_half_size : Vector2 = abs(_pointer.global_position - camera.get_screen_center_position()) + CAMERA_AUTO_UNZOOM_OFFSET
-				var desired_zoom : Vector2
+				unzoom_needed = true
+				_default_zoom_needed_time = 0.0
+				
+				var desired_half_size : Vector2 = abs(_pointer.global_position - camera.get_screen_center_position()) + CAMERA_UNZOOM_OFFSET
 				if desired_half_size.x > desired_half_size.y:
-					desired_zoom = Vector2.ONE * camera.get_viewport_rect().size.x / (desired_half_size.x * 2.0)
+					_unzoom_camera_zoom = Vector2.ONE * camera.get_viewport_rect().size.x / (desired_half_size.x * 2.0)
 				else:
-					desired_zoom = Vector2.ONE * camera.get_viewport_rect().size.y / (desired_half_size.y * 2.0)
-				camera.zoom = lerp(camera.zoom, desired_zoom, unzoom_weight)
-			else:
-				camera.zoom = lerp(camera.zoom, _default_camera_zoom, zoom_weight)
-		elif camera.zoom != _default_camera_zoom:
-			# TODO: Use move_toward instead to avoid performance penalty  
+					_unzoom_camera_zoom = Vector2.ONE * camera.get_viewport_rect().size.y / (desired_half_size.y * 2.0)
+		
+		if not (unzoom_needed or camera.zoom.is_equal_approx(_default_camera_zoom)):
+			_default_zoom_needed_time = minf(_default_zoom_needed_time + delta, INF)
+		else:
+			_default_zoom_needed_time = 0.0
+		
+		if unzoom_needed:
+			var unzoom_weight := minf(CAMERA_UNZOOM_SPEED_FACTOR * delta, 1.0)
+			camera.zoom = lerp(camera.zoom, _unzoom_camera_zoom, unzoom_weight)
+		elif _default_zoom_needed_time > CAMERA_DEFAULT_ZOOM_ACTIVATION_TIME:
+			var zoom_weight := minf(CAMERA_DEFAULT_ZOOM_SPEED_FACTOR * delta, 1.0)
 			camera.zoom = lerp(camera.zoom, _default_camera_zoom, zoom_weight)
+			
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and _ray_cast.is_colliding() and not holding:
