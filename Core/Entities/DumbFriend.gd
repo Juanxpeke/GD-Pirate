@@ -24,11 +24,11 @@ const HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR : float = 2160.0
 ## TODO
 const HORIZONTAL_MOVEMENT_FRICTION_ON_FLOOR : float = 1280.0
 ## TODO
-const HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR : float = 2160.0
+const HORIZONTAL_MOVEMENT_ACCELERATION_ON_AIR : float = 2640.0
 ## TODO
 const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_FLOOR : float = 500.0
 ## TODO
-const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR : float = 800.0
+const MAX_HORIZONTAL_MOVEMENT_SPEED_ON_AIR : float = 700.0
 ## TODO
 const MAX_VERTICAL_MOVEMENT_SPEED : float = 1800.0
 ## TODO
@@ -61,7 +61,7 @@ const CHARACTER_KEYS_DATA = {
 	},
 	CharacterKey.STOMP : {
 		"name": "S",
-		"weight": 0.002,
+		"weight": 0.0,
 		"min_time": MIN_RANDOM_KEY_TIME,
 		"max_time": MAX_RANDOM_KEY_TIME,
 	}
@@ -81,9 +81,9 @@ var _character_key : CharacterKey = CharacterKey.NONE
 #endregion Private Variables
 
 #region On Ready Variables
-@onready var _stomp_area           : Area2D        = %StompArea
-@onready var _random_key_timer     : Timer         = %RandomKeyTimer
-@onready var _random_key_label     : Label         = %RandomKeyLabel
+@onready var _stomp_area       : Area2D = %StompArea
+@onready var _random_key_timer : Timer  = %RandomKeyTimer
+@onready var _random_key_label : Label  = %RandomKeyLabel
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
@@ -155,7 +155,7 @@ func _initial_setup() -> void:
 	var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
 	await timer.timeout
 	
-	_set_new_character_key()
+	#_set_new_character_key()
 #endregion Initialization
 func _set_new_character_key(exclude_current : bool = true) -> void:
 	var pool_copy := _character_keys_pool.duplicate()

@@ -27,10 +27,11 @@ texture = ExtResource("2_820ae")
 
 [node name="GrapplingHookPivot" type="Node2D" parent="."]
 
-[node name="GrapplingHook" parent="GrapplingHookPivot" node_paths=PackedStringArray("character", "pivot") instance=ExtResource("3_jfa0e")]
+[node name="GrapplingHook" parent="GrapplingHookPivot" node_paths=PackedStringArray("character", "pivot", "camera") instance=ExtResource("3_jfa0e")]
 position = Vector2(30, 0)
 character = NodePath("../..")
 pivot = NodePath("..")
+camera = NodePath("../../Camera")
 
 [node name="StompArea" type="Area2D" parent="."]
 unique_name_in_owner = true
