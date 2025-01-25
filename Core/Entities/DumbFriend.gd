@@ -94,9 +94,6 @@ const CHARACTER_KEYS_DATA = {
 				print("FOLLOWING TARGET")
 			BehaviourMode.RANDOM:
 				print("RANDOM")
-				var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
-				await timer.timeout
-				_set_random_character_key()
 		
 		behaviour_mode = new_behaviour_mode
 #endregion Exports Variables
@@ -192,7 +189,14 @@ func _initial_connections() -> void:
 
 func _initial_setup() -> void:
 	_rng.randomize()
+	
+	_init_random_stuff()
 #endregion Initialization
+func _init_random_stuff() -> void:
+	var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
+	await timer.timeout
+	_set_random_character_key()
+
 func _set_random_character_key(exclude_current : bool = true) -> void:
 	var pool_copy := _character_keys_pool.duplicate()
 	if exclude_current:
