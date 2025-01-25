@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=4 uid="uid://c63rxtnelm88o"]
+
+[ext_resource type="Script" path="res://Core/Map/Levels/MainLevel.gd" id="1_g7cyy"]
+[ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Core/Entities/DumbFriend.tscn" id="2_phq1h"]
+[ext_resource type="PackedScene" uid="uid://84qq6jrv5d6p" path="res://Core/Map/TileMap/DumbTileMapLayer.tscn" id="3_10tt2"]
+[ext_resource type="PackedScene" uid="uid://8hojnkwmaqum" path="res://Core/Map/Elements/ScriptedMovementArea.tscn" id="4_isd2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qswnf"]
+size = Vector2(992, 60)
+
+[node name="MainLevel" type="Node2D"]
+script = ExtResource("1_g7cyy")
+
+[node name="DumbFriend" parent="." instance=ExtResource("2_phq1h")]
+position = Vector2(570, 581)
+
+[node name="DumbTileMapLayer" parent="." instance=ExtResource("3_10tt2")]
+tile_map_data = PackedByteArray("AAAMABQAAAAAAAAAAAANABQAAAAAAAAAAAAOABQAAAAAAAAAAAAPABQAAAAAAAAAAAAQABQAAAAAAAAAAAARABQAAAAAAAAAAAASABQAAAAAAAAAAAATABQAAAAAAAAAAAAUABQAAAAAAAAAAAAVABQAAAAAAAAAAAAWABQAAAAAAAAAAAAXABQAAAAAAAAAAAAYABQAAAAAAAAAAAAZABQAAAAAAAAAAAAaABQAAAAAAAAAAAAbABQAAAAAAAAAAAALABQAAAAAAAAAAAAKABQAAAAAAAAAAAAJABQAAAAAAAAAAAAIABQAAAAAAAAAAAAHABQAAAAAAAAAAAAGABQAAAAAAAAAAAAFABQAAAAAAAAAAAAEABQAAAAAAAAAAAADABQAAAAAAAAAAAACABQAAAAAAAAAAAABABQAAAAAAAAAAAAAABQAAAAAAAAAAAAdABQAAAAAAAAAAAAeABQAAAAAAAAAAAAcABQAAAAAAAAAAAAkAA0AAAAAAAAAAAAjAA0AAAAAAAAAAAAiAA0AAAAAAAAAAAAhAA0AAAAAAAAAAAAgAA0AAAAAAAAAAAAfAA0AAAAAAAAAAAAeAA0AAAAAAAAAAAAdAA0AAAAAAAAAAAAbAAUAAAAAAAAAAAAaAAUAAAAAAAAAAAAZAAUAAAAAAAAAAAAYAAUAAAAAAAAAAAAXAAUAAAAAAAAAAAAWAAUAAAAAAAAAAAAVAAUAAAAAAAAAAAAUAAUAAAAAAAAAAAA=")
+
+[node name="ScriptedMovementArea" parent="." node_paths=PackedStringArray("character", "next_area") instance=ExtResource("4_isd2s")]
+position = Vector2(496, 607)
+character = NodePath("../DumbFriend")
+next_area = NodePath("../ScriptedMovementArea2")
+is_initial = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedMovementArea"]
+shape = SubResource("RectangleShape2D_qswnf")
+
+[node name="Destination" type="Marker2D" parent="ScriptedMovementArea"]
+position = Vector2(120, 0)
+
+[node name="ScriptedMovementArea2" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_isd2s")]
+position = Vector2(1094, 386)
+character = NodePath("../DumbFriend")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedMovementArea2"]
+shape = SubResource("RectangleShape2D_qswnf")
+
+[node name="Destination" type="Marker2D" parent="ScriptedMovementArea2"]
+position = Vector2(120, 0)

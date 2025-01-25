@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=4 uid="uid://csqii01ea7q7t"]
+[gd_scene load_steps=4 format=4 uid="uid://csqii01ea7q7t"]
 
+[ext_resource type="Script" path="res://Core/Map/Levels/MainLevel.gd" id="1_a7rn7"]
 [ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Core/Entities/DumbFriend.tscn" id="1_cdbok"]
 [ext_resource type="PackedScene" uid="uid://84qq6jrv5d6p" path="res://Core/Map/TileMap/DumbTileMapLayer.tscn" id="2_0ywnw"]
 
 [node name="BasicSuite" type="Node2D"]
+script = ExtResource("1_a7rn7")
 
 [node name="DumbFriend" parent="." instance=ExtResource("1_cdbok")]
 position = Vector2(570, 581)

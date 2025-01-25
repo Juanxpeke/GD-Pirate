@@ -7,6 +7,15 @@ extends CharacterBody2D
 
 #region Enums
 ## TODO
+enum BehaviourMode {
+	## TODO
+	NONE,
+	## TODO
+	FOLLOWING_TARGET,
+	## TODO
+	RANDOM
+}
+## TODO
 enum CharacterKey {
 	## TODO
 	NONE,
@@ -76,6 +85,20 @@ const CHARACTER_KEYS_DATA = {
 #endregion Constants
 
 #region Exports Variables
+@export var behaviour_mode : BehaviourMode = BehaviourMode.NONE:
+	set(new_behaviour_mode):
+		match new_behaviour_mode:
+			BehaviourMode.NONE:
+				print("NONE")
+			BehaviourMode.FOLLOWING_TARGET:
+				print("FOLLOWING TARGET")
+			BehaviourMode.RANDOM:
+				print("RANDOM")
+				var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
+				await timer.timeout
+				_set_random_character_key()
+		
+		behaviour_mode = new_behaviour_mode
 #endregion Exports Variables
 
 #region Public Variables
@@ -83,8 +106,19 @@ const CHARACTER_KEYS_DATA = {
 
 #region Private Variables
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
 var _character_keys_pool = [CharacterKey.NONE, CharacterKey.GO_LEFT, CharacterKey.GO_RIGHT, CharacterKey.STOMP]
-var _character_key : CharacterKey = CharacterKey.NONE
+
+var _character_key : CharacterKey = CharacterKey.NONE:
+	set(new_character_key):
+		_random_key_label.text = CHARACTER_KEYS_DATA[new_character_key].name
+		
+		if new_character_key == CharacterKey.STOMP:
+			_stomp_area.monitoring = true
+		else:
+			_stomp_area.monitoring = false
+		
+		_character_key = new_character_key
 #endregion Private Variables
 
 #region On Ready Variables
@@ -149,7 +183,7 @@ func _on_stomp_area_shape_entered(body_rid : RID, body : Node2D, _body_shape_ind
 			dumb_tile_map_layer.erase_cell(coords)
 
 func _on_random_key_timer_timeout() -> void:
-	_set_new_character_key()
+	_set_random_character_key()
 #endregion Callbacks
 #region Initialization
 func _initial_connections() -> void:
@@ -158,13 +192,8 @@ func _initial_connections() -> void:
 
 func _initial_setup() -> void:
 	_rng.randomize()
-	
-	var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
-	await timer.timeout
-	
-	#_set_new_character_key()
 #endregion Initialization
-func _set_new_character_key(exclude_current : bool = true) -> void:
+func _set_random_character_key(exclude_current : bool = true) -> void:
 	var pool_copy := _character_keys_pool.duplicate()
 	if exclude_current:
 		pool_copy.erase(_character_key)
@@ -175,18 +204,14 @@ func _set_new_character_key(exclude_current : bool = true) -> void:
 
 	var random_weight := _rng.randf_range(0.0, pool_keys_total_weight)
 	
+	var final_key : CharacterKey
 	for key in pool_copy:
-		_character_key = key
+		final_key = key
 		random_weight -= CHARACTER_KEYS_DATA[key].weight
 		if random_weight < 0.0:
 			break
 	
-	_random_key_label.text = CHARACTER_KEYS_DATA[_character_key].name
-	
-	if _character_key == CharacterKey.STOMP:
-		_stomp_area.monitoring = true
-	else:
-		_stomp_area.monitoring = false
+	_character_key = final_key
 	
 	var min_time : float = CHARACTER_KEYS_DATA[_character_key].min_time
 	var max_time : float = CHARACTER_KEYS_DATA[_character_key].max_time
