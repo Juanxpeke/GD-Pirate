@@ -13,6 +13,8 @@ enum BehaviourMode {
 	## TODO
 	FOLLOWING_TARGET,
 	## TODO
+	STOMP,
+	## TODO
 	RANDOM
 }
 ## TODO
