@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3emuubeiw05k"]
+
+[ext_resource type="Script" path="res://Core/Entities/LagTeleporter.gd" id="1_6ta0j"]
+
+[node name="LagTeleporter" type="Node2D"]
+script = ExtResource("1_6ta0j")
+
+[node name="LagAnimationTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="TeleportTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="RecordTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true

@@ -73,7 +73,7 @@ func _ready() -> void:
 	
 	_default_camera_zoom = camera.zoom
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta : float) -> void:
 	if holding:
 		_holding_time += delta
 		if _holding_time > MAX_HOLD_TIME:
@@ -129,7 +129,7 @@ func _physics_process(delta: float) -> void:
 			camera.zoom = lerp(camera.zoom, _default_camera_zoom, zoom_weight)
 			
 
-func _input(event: InputEvent) -> void:
+func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("left_click") and _ray_cast.is_colliding() and not holding:
 		var collision_point := _ray_cast.get_collision_point()
 		

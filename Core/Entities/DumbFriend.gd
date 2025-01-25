@@ -6,12 +6,19 @@ extends CharacterBody2D
 #endregion Signals
 
 #region Enums
+## TODO
 enum CharacterKey {
+	## TODO
 	NONE,
+	## TODO
 	GO_LEFT,
+	## TODO
 	GO_RIGHT,
+	## TODO
 	JUMP,
+	## TODO
 	STOMP,
+	## TODO
 	CHANGE_WEAPON
 }
 #endregion Enums
@@ -61,7 +68,7 @@ const CHARACTER_KEYS_DATA = {
 	},
 	CharacterKey.STOMP : {
 		"name": "S",
-		"weight": 0.0,
+		"weight": 0.2,
 		"min_time": MIN_RANDOM_KEY_TIME,
 		"max_time": MAX_RANDOM_KEY_TIME,
 	}
