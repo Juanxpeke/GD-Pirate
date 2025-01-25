@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://8hojnkwmaqum"]
-
-[ext_resource type="Script" path="res://Core/Map/Elements/ScriptedMovementArea.gd" id="1_kjidy"]
-
-[node name="ScriptedMovementArea" type="Area2D"]
-monitorable = false
-script = ExtResource("1_kjidy")
-metadata/_edit_group_ = true

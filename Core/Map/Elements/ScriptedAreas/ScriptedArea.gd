@@ -1,4 +1,4 @@
-class_name ScriptedMovementArea
+class_name ScriptedArea
 extends Area2D
 ## Docstring
 
@@ -23,20 +23,22 @@ enum EnteringTypeByOrdering {
 #endregion Constants
 
 #region Static Variables
-static var current_scripted_movement_area : ScriptedMovementArea = null
+static var last_scripted_area : ScriptedArea = null
 #endregion Static Variables
 
 #region Exports Variables
 ## TODO
-@export var character   : CharacterBody2D = null
+@export var character : DumbFriend = null
 ## TODO
-@export var destination : Marker2D = null
+@export var one_shot : bool = false
 
 @export_group("Ordering")
 ## TODO
-@export var next_area : ScriptedMovementArea = null
+@export var next_area : ScriptedArea = null
 ## TODO
-@export var is_initial : bool = false
+@export var required_previous_area : ScriptedArea = null
+## TODO
+@export var force_initial : bool = false
 
 @export_group("Dialogues")
 ## TODO
@@ -60,53 +62,64 @@ static var current_scripted_movement_area : ScriptedMovementArea = null
 #region Built-in Virtual Methods
 func _ready() -> void:
 	assert(character)
-	assert(destination)
 	assert(monitoring)
 	assert(not monitorable)
 	
-	if is_initial:
-		current_scripted_movement_area = self
+	if force_initial:
+		last_scripted_area = self
 	
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-
-func _process(delta : float) -> void:
-	pass
 #endregion Built-in Virtual Methods
 
 #region Public Methods
 #endregion Public Methods
 
 #region Private Methods
+#region Calbacks
 func _on_body_entered(body : Node2D) -> void:
 	if body is DumbFriend:
-		if current_scripted_movement_area != self:
-			var past_scripted_movement_area := current_scripted_movement_area
-			current_scripted_movement_area = self
-			
-			if past_scripted_movement_area.next_area == current_scripted_movement_area:
+		var past_scripted_area := last_scripted_area
+		last_scripted_area = self
+		
+		if required_previous_area == null or (required_previous_area == past_scripted_area):
+			_character_entered()
+			if one_shot:
+				last_scripted_area = past_scripted_area
+				queue_free()
+		else:
+			""
+		
+		if past_scripted_area != null and past_scripted_area != last_scripted_area:
+			if past_scripted_area.next_area == last_scripted_area:
 				character_entered.emit(EnteringTypeByOrdering.DEFAULT)
 				return
 			
-			var future_area_before_change := past_scripted_movement_area.next_area
+			var future_area_before_change := past_scripted_area.next_area
 			while future_area_before_change != null:
 				if future_area_before_change == self:
 					character_entered.emit(EnteringTypeByOrdering.SKIP)
-					skip_dialogue_pool.execute()
+					if skip_dialogue_pool:
+						skip_dialogue_pool.execute()
 					return
 				future_area_before_change = future_area_before_change.next_area
 			
 			var future_area_after_change := self.next_area
 			while future_area_after_change != null:
-				if future_area_after_change == past_scripted_movement_area:
+				if future_area_after_change == past_scripted_area:
 					character_entered.emit(EnteringTypeByOrdering.RETURN)
-					return_dialogue_pool.execute()
+					if return_dialogue_pool:
+						return_dialogue_pool.execute()
 					return
 				future_area_after_change = future_area_after_change.next_area
 
 func _on_body_exited(body : Node2D) -> void:
 	if body is DumbFriend:
-		pass
+		character.behaviour_mode = DumbFriend.BehaviourMode.NONE
+#endregion Callbacks
+
+func _character_entered() -> void:
+	pass
 #endregion Private Methods
 
 #region Inner Classes

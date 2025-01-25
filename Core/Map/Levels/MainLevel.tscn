@@ -1,40 +1,75 @@
-[gd_scene load_steps=6 format=4 uid="uid://c63rxtnelm88o"]
+[gd_scene load_steps=9 format=4 uid="uid://c63rxtnelm88o"]
 
 [ext_resource type="Script" path="res://Core/Map/Levels/MainLevel.gd" id="1_g7cyy"]
 [ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Core/Entities/DumbFriend.tscn" id="2_phq1h"]
 [ext_resource type="PackedScene" uid="uid://84qq6jrv5d6p" path="res://Core/Map/TileMap/DumbTileMapLayer.tscn" id="3_10tt2"]
-[ext_resource type="PackedScene" uid="uid://8hojnkwmaqum" path="res://Core/Map/Elements/ScriptedMovementArea.tscn" id="4_isd2s"]
+[ext_resource type="PackedScene" uid="uid://c6la24do7dga1" path="res://Core/Map/Elements/ScriptedAreas/ScriptedMovementArea.tscn" id="4_isd2s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qswnf"]
-size = Vector2(992, 60)
+size = Vector2(992, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11xcu"]
+size = Vector2(256, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u20ds"]
+size = Vector2(256, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkrlf"]
+size = Vector2(224, 30)
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_g7cyy")
 
 [node name="DumbFriend" parent="." instance=ExtResource("2_phq1h")]
-position = Vector2(570, 581)
+position = Vector2(128, 585)
 
 [node name="DumbTileMapLayer" parent="." instance=ExtResource("3_10tt2")]
-tile_map_data = PackedByteArray("AAAMABQAAAAAAAAAAAANABQAAAAAAAAAAAAOABQAAAAAAAAAAAAPABQAAAAAAAAAAAAQABQAAAAAAAAAAAARABQAAAAAAAAAAAASABQAAAAAAAAAAAATABQAAAAAAAAAAAAUABQAAAAAAAAAAAAVABQAAAAAAAAAAAAWABQAAAAAAAAAAAAXABQAAAAAAAAAAAAYABQAAAAAAAAAAAAZABQAAAAAAAAAAAAaABQAAAAAAAAAAAAbABQAAAAAAAAAAAALABQAAAAAAAAAAAAKABQAAAAAAAAAAAAJABQAAAAAAAAAAAAIABQAAAAAAAAAAAAHABQAAAAAAAAAAAAGABQAAAAAAAAAAAAFABQAAAAAAAAAAAAEABQAAAAAAAAAAAADABQAAAAAAAAAAAACABQAAAAAAAAAAAABABQAAAAAAAAAAAAAABQAAAAAAAAAAAAdABQAAAAAAAAAAAAeABQAAAAAAAAAAAAcABQAAAAAAAAAAAAkAA0AAAAAAAAAAAAjAA0AAAAAAAAAAAAiAA0AAAAAAAAAAAAhAA0AAAAAAAAAAAAgAA0AAAAAAAAAAAAfAA0AAAAAAAAAAAAeAA0AAAAAAAAAAAAdAA0AAAAAAAAAAAAbAAUAAAAAAAAAAAAaAAUAAAAAAAAAAAAZAAUAAAAAAAAAAAAYAAUAAAAAAAAAAAAXAAUAAAAAAAAAAAAWAAUAAAAAAAAAAAAVAAUAAAAAAAAAAAAUAAUAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAMABQAAAAAAAAAAAANABQAAAAAAAAAAAAOABQAAAAAAAAAAAAPABQAAAAAAAAAAAAQABQAAAAAAAAAAAARABQAAAAAAAAAAAASABQAAAAAAAAAAAATABQAAAAAAAAAAAAUABQAAAAAAAAAAAAVABQAAAAAAAAAAAAWABQAAAAAAAAAAAAXABQAAAAAAAAAAAAYABQAAAAAAAAAAAAZABQAAAAAAAAAAAAaABQAAAAAAAAAAAAbABQAAAAAAAAAAAALABQAAAAAAAAAAAAKABQAAAAAAAAAAAAJABQAAAAAAAAAAAAIABQAAAAAAAAAAAAHABQAAAAAAAAAAAAGABQAAAAAAAAAAAAFABQAAAAAAAAAAAAEABQAAAAAAAAAAAADABQAAAAAAAAAAAACABQAAAAAAAAAAAABABQAAAAAAAAAAAAAABQAAAAAAAAAAAAdABQAAAAAAAAAAAAeABQAAAAAAAAAAAAcABQAAAAAAAAAAAAJAPj/AAAAAAAAAAAJAPn/AAAAAAAAAAAJAPr/AAAAAAAAAAAJAPv/AAAAAAAAAAAJAPz/AAAAAAAAAAAJAP3/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAJAAAAAAAAAAAAAAAKAPj/AAAAAAAAAAAKAAAAAAAAAAAAAAALAPj/AAAAAAAAAAAMAPj/AAAAAAAAAAAMAAAAAAACAAAAAAANAPj/AAAAAAAAAAANAAAAAAACAAAAAAANAAgAAAAAAAAAAAAOAPj/AAAAAAAAAAAOAAAAAAACAAAAAAAOAAgAAAAAAAAAAAAPAPj/AAAAAAAAAAAPAAAAAAAAAAAAAAAPAAgAAAAAAAAAAAAQAPj/AAAAAAAAAAAQAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAARAPj/AAAAAAAAAAASAPj/AAAAAAAAAAATAPj/AAAAAAAAAAAUAPj/AAAAAAAAAAAVAPj/AAAAAAAAAAAWAPj/AAAAAAAAAAAWAAUAAAAAAAAAAAAXAPj/AAAAAAAAAAAXAAUAAAAAAAAAAAAYAPj/AAAAAAAAAAAYAAUAAAAAAAAAAAAZAPj/AAAAAAAAAAAZAAUAAAAAAAAAAAAaAPj/AAAAAAAAAAAaAAUAAAAAAAAAAAAbAPj/AAAAAAAAAAAbAAUAAAAAAAAAAAAcAPj/AAAAAAAAAAAcAPn/AAAAAAAAAAAcAPr/AAAAAAAAAAAcAPv/AAAAAAAAAAAcAPz/AAAAAAAAAAAcAP3/AAAAAAAAAAAcAAUAAAAAAAAAAAAdAP3/AAAAAAAAAAAdAAUAAAAAAAAAAAAeAP3/AAAAAAAAAAAfAP3/AAAAAAAAAAAfAA0AAAAAAAAAAAAgAPj/AAAAAAAAAAAgAPn/AAAAAAAAAAAgAPr/AAAAAAAAAAAgAPv/AAAAAAAAAAAgAPz/AAAAAAAAAAAgAP3/AAAAAAAAAAAgAA0AAAAAAAAAAAAhAPj/AAAAAAAAAAAhAA0AAAAAAAAAAAAiAPj/AAAAAAAAAAAiAA0AAAAAAAAAAAAjAPj/AAAAAAAAAAAjAA0AAAAAAAAAAAAkAPj/AAAAAAAAAAAkAA0AAAAAAAAAAAAlAPj/AAAAAAAAAAAlAA0AAAAAAAAAAAAmAPj/AAAAAAAAAAAmAA0AAAAAAAAAAAAnAPj/AAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAALAAAAAAACAAAAAAAJAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAALAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAA=")
 
-[node name="ScriptedMovementArea" parent="." node_paths=PackedStringArray("character", "next_area") instance=ExtResource("4_isd2s")]
-position = Vector2(496, 607)
-character = NodePath("../DumbFriend")
+[node name="ScriptedAreas" type="Node2D" parent="."]
+
+[node name="ScriptedMovementArea" parent="ScriptedAreas" node_paths=PackedStringArray("target", "character", "next_area") instance=ExtResource("4_isd2s")]
+position = Vector2(496, 624)
+target = NodePath("Target")
+character = NodePath("../../DumbFriend")
 next_area = NodePath("../ScriptedMovementArea2")
-is_initial = true
 
-[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedMovementArea"]
+[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedAreas/ScriptedMovementArea"]
 shape = SubResource("RectangleShape2D_qswnf")
 
-[node name="Destination" type="Marker2D" parent="ScriptedMovementArea"]
-position = Vector2(120, 0)
+[node name="Target" type="Marker2D" parent="ScriptedAreas/ScriptedMovementArea"]
+position = Vector2(100, 0)
 
-[node name="ScriptedMovementArea2" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_isd2s")]
-position = Vector2(1094, 386)
-character = NodePath("../DumbFriend")
+[node name="ScriptedMovementArea2" parent="ScriptedAreas" node_paths=PackedStringArray("target", "character", "next_area") instance=ExtResource("4_isd2s")]
+position = Vector2(1120, 400)
+target = NodePath("Target")
+character = NodePath("../../DumbFriend")
+next_area = NodePath("../ScriptedMovementArea3")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedMovementArea2"]
-shape = SubResource("RectangleShape2D_qswnf")
+[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedAreas/ScriptedMovementArea2"]
+shape = SubResource("RectangleShape2D_11xcu")
 
-[node name="Destination" type="Marker2D" parent="ScriptedMovementArea2"]
-position = Vector2(120, 0)
+[node name="Target" type="Marker2D" parent="ScriptedAreas/ScriptedMovementArea2"]
+position = Vector2(50, 0)
+
+[node name="ScriptedMovementArea3" parent="ScriptedAreas" node_paths=PackedStringArray("target", "character", "next_area") instance=ExtResource("4_isd2s")]
+position = Vector2(832, 143)
+target = NodePath("Target")
+character = NodePath("../../DumbFriend")
+next_area = NodePath("../ScriptedMovementArea4")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedAreas/ScriptedMovementArea3"]
+shape = SubResource("RectangleShape2D_u20ds")
+
+[node name="Target" type="Marker2D" parent="ScriptedAreas/ScriptedMovementArea3"]
+
+[node name="ScriptedMovementArea4" parent="ScriptedAreas" node_paths=PackedStringArray("target", "character") instance=ExtResource("4_isd2s")]
+position = Vector2(432, -16)
+target = NodePath("Target")
+character = NodePath("../../DumbFriend")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="ScriptedAreas/ScriptedMovementArea4"]
+shape = SubResource("RectangleShape2D_rkrlf")
+
+[node name="Target" type="Marker2D" parent="ScriptedAreas/ScriptedMovementArea4"]
+position = Vector2(-16, 0)

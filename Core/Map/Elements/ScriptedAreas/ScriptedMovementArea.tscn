@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6la24do7dga1"]
+
+[ext_resource type="Script" path="res://Core/Map/Elements/ScriptedAreas/ScriptedMovementArea.gd" id="1_kjidy"]
+
+[node name="ScriptedMovementArea" type="Area2D"]
+monitorable = false
+script = ExtResource("1_kjidy")

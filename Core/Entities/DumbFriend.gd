@@ -34,8 +34,6 @@ enum CharacterKey {
 
 #region Constants
 ## TODO
-const INITIAL_IDLE_TIME : float = 2.0
-## TODO
 const HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR : float = 2160.0
 ## TODO
 const HORIZONTAL_MOVEMENT_FRICTION_ON_FLOOR : float = 1280.0
@@ -51,10 +49,19 @@ const MAX_VERTICAL_MOVEMENT_SPEED : float = 1800.0
 const STOMP_HORIZONTAL_FRICTION : float = 2000.0
 ## TODO
 const STOMP_VERTICAL_ACCELERATION : float = 3200.0
+
+## TODO
+const FOLLOW_TARGET_ACCEPTED_DELTA_X : float = 40.0
+## TODO
+const FOLLOW_TARGET_ACCEPTED_DELTA_Y : float = 52.0
+
+## TODO
+const INITIAL_IDLE_TIME : float = 2.0
 ## TODO
 const MIN_RANDOM_KEY_TIME : float = 1.0
 ## TODO
 const MAX_RANDOM_KEY_TIME : float = 4.0
+
 ## TODO
 const CHARACTER_KEYS_DATA = {
 	CharacterKey.NONE : {
@@ -87,18 +94,15 @@ const CHARACTER_KEYS_DATA = {
 #region Exports Variables
 @export var behaviour_mode : BehaviourMode = BehaviourMode.NONE:
 	set(new_behaviour_mode):
-		match new_behaviour_mode:
-			BehaviourMode.NONE:
-				print("NONE")
-			BehaviourMode.FOLLOWING_TARGET:
-				print("FOLLOWING TARGET")
-			BehaviourMode.RANDOM:
-				print("RANDOM")
-		
 		behaviour_mode = new_behaviour_mode
+		if is_inside_tree():
+			_behaviour_mode_initialization()
+		else:
+			pass
 #endregion Exports Variables
 
 #region Public Variables
+var follow_target : Vector2 = Vector2.ZERO
 #endregion Public Variables
 
 #region Private Variables
@@ -131,7 +135,33 @@ func _ready() -> void:
 	_initial_setup()
 
 func _physics_process(delta: float) -> void:
-	
+	_physics_process_behaviour()
+	_physics_process_movement(delta)
+
+func _physics_process_behaviour() -> void:
+	match behaviour_mode:
+		BehaviourMode.NONE:
+			pass
+		BehaviourMode.FOLLOWING_TARGET:
+			var delta_x : float = follow_target.x - global_position.x
+			var delta_y : float = follow_target.y - global_position.y
+			
+			if abs(delta_x) > FOLLOW_TARGET_ACCEPTED_DELTA_X:
+				if delta_x > 0:
+					_character_key = CharacterKey.GO_RIGHT
+				else:
+					_character_key = CharacterKey.GO_LEFT
+			elif abs(delta_y) > FOLLOW_TARGET_ACCEPTED_DELTA_Y:
+				if delta_y > 0:
+					_character_key = CharacterKey.STOMP
+				else:
+					_character_key = CharacterKey.NONE
+			else:
+				_character_key = CharacterKey.NONE
+		BehaviourMode.RANDOM:
+			pass
+
+func _physics_process_movement(delta : float) -> void:
 	var horizontal_movement_direction = Vector2.ZERO
 	match _character_key:
 		CharacterKey.GO_LEFT:
@@ -189,13 +219,19 @@ func _initial_connections() -> void:
 
 func _initial_setup() -> void:
 	_rng.randomize()
-	
-	_init_random_stuff()
+	_behaviour_mode_initialization()
+
+func _behaviour_mode_initialization() -> void:
+	match behaviour_mode:
+		BehaviourMode.NONE:
+			_character_key = CharacterKey.NONE
+		BehaviourMode.FOLLOWING_TARGET:
+			_character_key = CharacterKey.NONE
+		BehaviourMode.RANDOM:
+			var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
+			await timer.timeout
+			_set_random_character_key()
 #endregion Initialization
-func _init_random_stuff() -> void:
-	var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
-	await timer.timeout
-	_set_random_character_key()
 
 func _set_random_character_key(exclude_current : bool = true) -> void:
 	var pool_copy := _character_keys_pool.duplicate()
