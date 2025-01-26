@@ -5,3 +5,4 @@
 [node name="ScriptedStompArea" type="Area2D"]
 monitorable = false
 script = ExtResource("1_xwxkx")
+metadata/_edit_group_ = true

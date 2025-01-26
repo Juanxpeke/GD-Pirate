@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://chmuocl1bn1mn"]
+
+[ext_resource type="Script" path="res://Core/Map/Elements/ScriptedAreas/ScriptedTeleportArea.gd" id="1_k5ela"]
+
+[node name="ScriptedTeleportArea" type="Area2D"]
+monitorable = false
+script = ExtResource("1_k5ela")
+metadata/_edit_group_ = true

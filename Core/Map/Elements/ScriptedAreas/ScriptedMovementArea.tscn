@@ -5,3 +5,4 @@
 [node name="ScriptedMovementArea" type="Area2D"]
 monitorable = false
 script = ExtResource("1_kjidy")
+metadata/_edit_group_ = true

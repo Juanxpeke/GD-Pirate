@@ -11,6 +11,8 @@ signal character_entered(entering_type : EnteringTypeByOrdering)
 ## TODO
 enum EnteringTypeByOrdering {
 	## TODO
+	NONE,
+	## TODO
 	RETURN,
 	## TODO
 	DEFAULT,
@@ -39,6 +41,8 @@ static var last_scripted_area : ScriptedArea = null
 @export var force_initial : bool = false
 
 @export_group("Dialogues")
+## TODO
+@export var enter_dialogue_pool : DialoguePool = null
 ## TODO
 @export var return_dialogue_pool : DialoguePool = null
 ## TODO
@@ -96,10 +100,10 @@ func _on_body_exited(body : Node2D) -> void:
 #endregion Callbacks
 
 func _character_entered() -> void:
-	pass
+	LogManager.systems_log("Character entered area %s" % name)
 	
 func _character_exited() -> void:
-	pass
+	LogManager.systems_log("Character exited area %s" % name)
 	
 func _handle_entering_type(past_scripted_area : ScriptedArea) -> void:
 	if past_scripted_area != null and past_scripted_area != last_scripted_area:
@@ -127,6 +131,10 @@ func _handle_entering_type(past_scripted_area : ScriptedArea) -> void:
 				LogManager.systems_log("RETURN case executed to area %s" % name)
 				return
 			future_area_after_change = future_area_after_change.next_area
+		
+		character_entered.emit(EnteringTypeByOrdering.NONE)
+		if enter_dialogue_pool:
+			enter_dialogue_pool.execute()
 #endregion Private Methods
 
 #region Inner Classes
