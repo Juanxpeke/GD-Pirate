@@ -8,6 +8,9 @@
 
 # Krita temporary files
 *.kra~
+*.jpg~
+*.jpeg~
+*.png~
 
 # Windows temporary files bug ignore
 **/*.tmp
