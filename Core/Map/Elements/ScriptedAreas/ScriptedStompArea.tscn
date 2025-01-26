@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://Core/Map/Elements/ScriptedAreas/ScriptedStompArea.gd" id="1_xwxkx"]
 
 [node name="ScriptedStompArea" type="Area2D"]
+monitorable = false
 script = ExtResource("1_xwxkx")

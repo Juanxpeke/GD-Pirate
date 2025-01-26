@@ -29,8 +29,6 @@ static var last_scripted_area : ScriptedArea = null
 #region Exports Variables
 ## TODO
 @export var character : DumbFriend = null
-## TODO
-@export var one_shot : bool = false
 
 @export_group("Ordering")
 ## TODO
@@ -51,6 +49,7 @@ static var last_scripted_area : ScriptedArea = null
 #endregion Public Variables
 
 #region Private Variables
+var _character_in : bool = false
 #endregion Private Variables
 
 #region On Ready Variables
@@ -83,43 +82,51 @@ func _on_body_entered(body : Node2D) -> void:
 		last_scripted_area = self
 		
 		if required_previous_area == null or (required_previous_area == past_scripted_area):
+			_character_in = true
 			_character_entered()
-			if one_shot:
-				last_scripted_area = past_scripted_area
-				queue_free()
+			_handle_entering_type(past_scripted_area)
 		else:
-			""
-		
-		if past_scripted_area != null and past_scripted_area != last_scripted_area:
-			if past_scripted_area.next_area == last_scripted_area:
-				character_entered.emit(EnteringTypeByOrdering.DEFAULT)
-				return
-			
-			var future_area_before_change := past_scripted_area.next_area
-			while future_area_before_change != null:
-				if future_area_before_change == self:
-					character_entered.emit(EnteringTypeByOrdering.SKIP)
-					if skip_dialogue_pool:
-						skip_dialogue_pool.execute()
-					return
-				future_area_before_change = future_area_before_change.next_area
-			
-			var future_area_after_change := self.next_area
-			while future_area_after_change != null:
-				if future_area_after_change == past_scripted_area:
-					character_entered.emit(EnteringTypeByOrdering.RETURN)
-					if return_dialogue_pool:
-						return_dialogue_pool.execute()
-					return
-				future_area_after_change = future_area_after_change.next_area
+			LogManager.systems_log("Required previous area is not last area (Not entering %s)" % name)
 
 func _on_body_exited(body : Node2D) -> void:
 	if body is DumbFriend:
-		character.behaviour_mode = DumbFriend.BehaviourMode.NONE
+		if _character_in:
+			_character_in = false
+			_character_exited()
 #endregion Callbacks
 
 func _character_entered() -> void:
 	pass
+	
+func _character_exited() -> void:
+	pass
+	
+func _handle_entering_type(past_scripted_area : ScriptedArea) -> void:
+	if past_scripted_area != null and past_scripted_area != last_scripted_area:
+		if past_scripted_area.next_area == last_scripted_area:
+			character_entered.emit(EnteringTypeByOrdering.DEFAULT)
+			LogManager.systems_log("DEFAULT case executed to area %s" % name)
+			return
+		
+		var future_area_before_change := past_scripted_area.next_area
+		while future_area_before_change != null:
+			if future_area_before_change == self:
+				character_entered.emit(EnteringTypeByOrdering.SKIP)
+				if skip_dialogue_pool:
+					skip_dialogue_pool.execute()
+				LogManager.systems_log("SKIP case executed to area %s" % name)
+				return
+			future_area_before_change = future_area_before_change.next_area
+		
+		var future_area_after_change := self.next_area
+		while future_area_after_change != null:
+			if future_area_after_change == past_scripted_area:
+				character_entered.emit(EnteringTypeByOrdering.RETURN)
+				if return_dialogue_pool:
+					return_dialogue_pool.execute()
+				LogManager.systems_log("RETURN case executed to area %s" % name)
+				return
+			future_area_after_change = future_area_after_change.next_area
 #endregion Private Methods
 
 #region Inner Classes

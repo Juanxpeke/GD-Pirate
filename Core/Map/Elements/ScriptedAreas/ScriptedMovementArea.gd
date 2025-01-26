@@ -36,6 +36,11 @@ func _ready() -> void:
 
 #region Private Methods
 func _character_entered() -> void:
+	LogManager.systems_log("Character entered movement area %s" % name)
 	character.behaviour_mode = DumbFriend.BehaviourMode.FOLLOWING_TARGET
 	character.follow_target = target.global_position
+
+func _character_exited() -> void:
+	LogManager.systems_log("Character exited movement area %s" % name)
+	character.behaviour_mode = DumbFriend.BehaviourMode.NONE
 #endregion Private Methods

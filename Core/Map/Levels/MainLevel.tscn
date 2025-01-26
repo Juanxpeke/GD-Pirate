@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://c63rxtnelm88o"]
+[gd_scene load_steps=11 format=4 uid="uid://c63rxtnelm88o"]
 
 [ext_resource type="Script" path="res://Core/Map/Levels/MainLevel.gd" id="1_g7cyy"]
 [ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Core/Entities/DumbFriend.tscn" id="2_phq1h"]
 [ext_resource type="PackedScene" uid="uid://84qq6jrv5d6p" path="res://Core/Map/TileMap/DumbTileMapLayer.tscn" id="3_10tt2"]
 [ext_resource type="PackedScene" uid="uid://c6la24do7dga1" path="res://Core/Map/Elements/ScriptedAreas/ScriptedMovementArea.tscn" id="4_isd2s"]
+[ext_resource type="PackedScene" uid="uid://cgqnfn1xhcyia" path="res://Core/Map/Elements/ScriptedAreas/ScriptedStompArea.tscn" id="5_xp5if"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qswnf"]
 size = Vector2(992, 30)
@@ -16,6 +17,9 @@ size = Vector2(256, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkrlf"]
 size = Vector2(224, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8jeq"]
+size = Vector2(224, 80)
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_g7cyy")
@@ -73,3 +77,11 @@ shape = SubResource("RectangleShape2D_rkrlf")
 
 [node name="Target" type="Marker2D" parent="ScriptedAreas/ScriptedMovementArea4"]
 position = Vector2(-16, 0)
+
+[node name="ScriptedStompArea" parent="ScriptedAreas" node_paths=PackedStringArray("character", "required_previous_area") instance=ExtResource("5_xp5if")]
+position = Vector2(432, -164)
+character = NodePath("../../DumbFriend")
+required_previous_area = NodePath("../ScriptedMovementArea4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScriptedAreas/ScriptedStompArea"]
+shape = SubResource("RectangleShape2D_t8jeq")

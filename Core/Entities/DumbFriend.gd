@@ -3,6 +3,8 @@ extends CharacterBody2D
 ## Docstring
 
 #region Signals
+## TODO
+signal stomped_tile
 #endregion Signals
 
 #region Enums
@@ -54,8 +56,6 @@ const STOMP_VERTICAL_ACCELERATION : float = 3200.0
 
 ## TODO
 const FOLLOW_TARGET_ACCEPTED_DELTA_X : float = 40.0
-## TODO
-const FOLLOW_TARGET_ACCEPTED_DELTA_Y : float = 52.0
 
 ## TODO
 const INITIAL_IDLE_TIME : float = 2.0
@@ -146,18 +146,12 @@ func _physics_process_behaviour() -> void:
 			pass
 		BehaviourMode.FOLLOWING_TARGET:
 			var delta_x : float = follow_target.x - global_position.x
-			var delta_y : float = follow_target.y - global_position.y
 			
 			if abs(delta_x) > FOLLOW_TARGET_ACCEPTED_DELTA_X:
 				if delta_x > 0:
 					_character_key = CharacterKey.GO_RIGHT
 				else:
 					_character_key = CharacterKey.GO_LEFT
-			elif abs(delta_y) > FOLLOW_TARGET_ACCEPTED_DELTA_Y:
-				if delta_y > 0:
-					_character_key = CharacterKey.STOMP
-				else:
-					_character_key = CharacterKey.NONE
 			else:
 				_character_key = CharacterKey.NONE
 		BehaviourMode.RANDOM:
@@ -210,6 +204,7 @@ func _on_stomp_area_shape_entered(body_rid : RID, body : Node2D, _body_shape_ind
 		
 		if tile_data.get_custom_data("Breakable"):
 			dumb_tile_map_layer.erase_cell(coords)
+			stomped_tile.emit()
 
 func _on_random_key_timer_timeout() -> void:
 	_set_random_character_key()
@@ -229,6 +224,8 @@ func _behaviour_mode_initialization() -> void:
 			_character_key = CharacterKey.NONE
 		BehaviourMode.FOLLOWING_TARGET:
 			_character_key = CharacterKey.NONE
+		BehaviourMode.STOMP:
+			_character_key = CharacterKey.STOMP
 		BehaviourMode.RANDOM:
 			var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
 			await timer.timeout
