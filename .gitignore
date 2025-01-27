@@ -6,7 +6,8 @@
 .godot/
 /android/
 
-# Krita temporary files
+# Krita autosave and temporary files
+*-autosave.kra
 *.kra~
 *.jpg~
 *.jpeg~
