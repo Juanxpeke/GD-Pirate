@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq6t20p7hm3ba"]
+[gd_scene load_steps=7 format=3 uid="uid://cq6t20p7hm3ba"]
 
 [ext_resource type="Script" path="res://Core/GUI/MainMenu.gd" id="1_hy214"]
+[ext_resource type="Texture2D" uid="uid://xbiqxctethfi" path="res://Core/GUI/MainMenuBackground.png" id="2_y3o0j"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="3_vjfqh"]
+[ext_resource type="PackedScene" uid="uid://jr4iy2jnycmy" path="res://Core/Components/VFX/LEDLayer.tscn" id="4_4n01m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auiq8"]
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnykj"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 32.0
+content_margin_bottom = 4.0
+bg_color = Color(0.141176, 0.0352941, 0.866667, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,3 +23,88 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hy214")
+
+[node name="MainMenuArranger" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Desktop" type="Control" parent="MainMenuArranger"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DesktopBackground" type="TextureRect" parent="MainMenuArranger/Desktop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("2_y3o0j")
+expand_mode = 1
+
+[node name="AppsMarginContainer" type="MarginContainer" parent="MainMenuArranger/Desktop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AppsContainer" type="GridContainer" parent="MainMenuArranger/Desktop/AppsMarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="StartIcon2" type="TextureRect" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_vjfqh")
+expand_mode = 1
+
+[node name="StartIcon3" type="TextureRect" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_vjfqh")
+expand_mode = 1
+
+[node name="StartIcon4" type="TextureRect" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_vjfqh")
+expand_mode = 1
+
+[node name="TaskBar" type="PanelContainer" parent="MainMenuArranger"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_auiq8")
+
+[node name="TaskBarArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar"]
+layout_mode = 2
+
+[node name="StarButton" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rnykj")
+
+[node name="StartButtonArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger/StarButton"]
+layout_mode = 2
+
+[node name="StartIcon" type="TextureRect" parent="MainMenuArranger/TaskBar/TaskBarArranger/StarButton/StartButtonArranger"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_vjfqh")
+expand_mode = 1
+
+[node name="StartLabel" type="Label" parent="MainMenuArranger/TaskBar/TaskBarArranger/StarButton/StartButtonArranger"]
+layout_mode = 2
+text = "Start"
+
+[node name="LEDLayer" parent="." instance=ExtResource("4_4n01m")]

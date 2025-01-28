@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://hu7crcefyb5u" path="res://Core/Assets/Materials/ScreenShader/LEDScreenMaterial.tres" id="1_tip0b"]
 
-[node name="LEDLayer" type="CanvasLayer"]
+[node name="LEDLayer" type="CanvasLayer" groups=["VFXLayer"]]
 
 [node name="Panel" type="Panel" parent="."]
 material = ExtResource("1_tip0b")

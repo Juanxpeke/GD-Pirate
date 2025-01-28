@@ -19,6 +19,7 @@ extends Node
 #region Private Variables
 var _rendering_color : String = "green"
 var _physics_color   : String = "yellow"
+var _character_color : String = "lightblue"
 var _systems_color   : String = "pink" 
 #endregion Private Variables
 
@@ -36,7 +37,11 @@ func rendering_log(message : String) -> void:
 # Logs a message related to a physics system.
 func physics_log(message : String) -> void:
 	print_rich("[color=%s](Physics) %s[/color]" % [_physics_color, message])
-	
+
+# Logs a message related to the character
+func character_log(message : String) -> void:
+	print_rich("[color=%s](Character) %s[/color]" % [_character_color, message])
+
 # Logs a message related to any system.
 func systems_log(message : String) -> void:
 	print_rich("[color=%s](Systems) %s[/color]" % [_systems_color, message])

@@ -11,14 +11,16 @@ config_version=5
 [application]
 
 config/name="GD-Pirate"
-run/main_scene="res://Core/Map/Levels/MainLevel.tscn"
+run/main_scene="res://Core/Map/Levels/TutorialLevel.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-run/max_fps=120
+run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
 [autoload]
 
 LogManager="*res://Debugging/Global/LogManager.gd"
+ConfigurationManager="*res://Core/Global/ConfigurationManager.tscn"
 
 [display]
 
@@ -27,6 +29,10 @@ window/stretch/mode="canvas_items"
 [editor]
 
 script/templates_search_path="res://ScriptTemplates"
+
+[global_group]
+
+VFXLayer=""
 
 [input]
 
@@ -64,3 +70,4 @@ jump={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.617856, 0.645802, 1, 1)

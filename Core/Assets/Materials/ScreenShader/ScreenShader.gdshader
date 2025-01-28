@@ -1,3 +1,4 @@
+/* Reference: https://www.youtube.com/watch?v=E401x98N6iA&t */
 shader_type canvas_item;
 render_mode unshaded, skip_vertex_transform;
 

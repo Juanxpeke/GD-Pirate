@@ -99,6 +99,7 @@ const CHARACTER_KEYS_DATA = {
 		behaviour_mode = new_behaviour_mode
 		if is_inside_tree():
 			_behaviour_mode_initialization()
+			LogManager.character_log("Behaviour mode set to %s" % behaviour_mode)
 		else:
 			pass
 #endregion Exports Variables
