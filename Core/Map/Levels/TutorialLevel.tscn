@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ck685dgarg51k"]
+[gd_scene load_steps=14 format=4 uid="uid://ck685dgarg51k"]
 
 [ext_resource type="Script" path="res://Core/Map/Levels/MainLevel.gd" id="1_eqeov"]
 [ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Core/Entities/DumbFriend.tscn" id="2_pgqd7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chmuocl1bn1mn" path="res://Core/Map/Elements/ScriptedAreas/ScriptedTeleportArea.tscn" id="4_uuvav"]
 [ext_resource type="PackedScene" uid="uid://c6la24do7dga1" path="res://Core/Map/Elements/ScriptedAreas/ScriptedMovementArea.tscn" id="5_ee51r"]
 [ext_resource type="PackedScene" uid="uid://cgqnfn1xhcyia" path="res://Core/Map/Elements/ScriptedAreas/ScriptedStompArea.tscn" id="6_nq8iw"]
+[ext_resource type="PackedScene" uid="uid://jr4iy2jnycmy" path="res://Core/Components/VFX/LEDLayer.tscn" id="7_vp1kq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlaa3"]
 size = Vector2(4000, 80)
@@ -100,3 +101,5 @@ required_previous_area = NodePath("../ScriptedMovementArea4")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="ScriptedAreas/ScriptedStompArea"]
 shape = SubResource("RectangleShape2D_t8jeq")
+
+[node name="LEDLayer" parent="." instance=ExtResource("7_vp1kq")]

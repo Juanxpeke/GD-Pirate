@@ -1,19 +1,53 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq6t20p7hm3ba"]
+[gd_scene load_steps=15 format=3 uid="uid://cq6t20p7hm3ba"]
 
+[ext_resource type="FontFile" uid="uid://u17cfwf1qkkm" path="res://Core/Assets/Fonts/m5x7.ttf" id="1_4eq27"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu.gd" id="1_hy214"]
 [ext_resource type="Texture2D" uid="uid://xbiqxctethfi" path="res://Core/GUI/MainMenuBackground.png" id="2_y3o0j"]
-[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="3_vjfqh"]
 [ext_resource type="PackedScene" uid="uid://jr4iy2jnycmy" path="res://Core/Components/VFX/LEDLayer.tscn" id="4_4n01m"]
+[ext_resource type="PackedScene" uid="uid://cfyg86by8ecc7" path="res://Core/GUI/App.tscn" id="4_lmww8"]
+[ext_resource type="Texture2D" uid="uid://buppcnemw6wpx" path="res://Core/GUI/MainMenuLogo.png" id="5_chrp0"]
+[ext_resource type="PackedScene" uid="uid://tfpqxmg4hdpo" path="res://Core/GUI/WindowTitleContainer.tscn" id="6_c6seu"]
+
+[sub_resource type="Theme" id="Theme_0a3ax"]
+default_font = ExtResource("1_4eq27")
+default_font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auiq8"]
-bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+bg_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnykj"]
-content_margin_left = 8.0
-content_margin_top = 4.0
+content_margin_left = 16.0
+content_margin_top = 8.0
 content_margin_right = 32.0
 content_margin_bottom = 4.0
 bg_color = Color(0.141176, 0.0352941, 0.866667, 1)
+border_width_top = 2
+border_color = Color(0.319822, 0.527253, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bmgw"]
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_top = 2
+border_color = Color(0.411442, 0.602984, 0.979072, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc67v"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.0666667, 0.552941, 0.913725, 1)
+border_width_top = 2
+border_color = Color(0.384426, 0.698321, 0.994726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eo72t"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0981292, 0.298289, 0.727521, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41820"]
+bg_color = Color(0.952941, 0.941176, 0.866667, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -22,6 +56,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_0a3ax")
 script = ExtResource("1_hy214")
 
 [node name="MainMenuArranger" type="VBoxContainer" parent="."]
@@ -63,25 +98,20 @@ theme_override_constants/margin_bottom = 16
 [node name="AppsContainer" type="GridContainer" parent="MainMenuArranger/Desktop/AppsMarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
+theme_override_constants/v_separation = 8
 
-[node name="StartIcon2" type="TextureRect" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="VolumeMixerApp" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer" node_paths=PackedStringArray("window") instance=ExtResource("4_lmww8")]
 layout_mode = 2
-texture = ExtResource("3_vjfqh")
-expand_mode = 1
+title = "Volume Mixer"
+window = NodePath("../../../../../VolumeMixerWindow")
 
-[node name="StartIcon3" type="TextureRect" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="SystemInformationApp" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer" instance=ExtResource("4_lmww8")]
 layout_mode = 2
-texture = ExtResource("3_vjfqh")
-expand_mode = 1
+title = "System Info."
 
-[node name="StartIcon4" type="TextureRect" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="GameApp" parent="MainMenuArranger/Desktop/AppsMarginContainer/AppsContainer" instance=ExtResource("4_lmww8")]
 layout_mode = 2
-texture = ExtResource("3_vjfqh")
-expand_mode = 1
+title = "Game Name"
 
 [node name="TaskBar" type="PanelContainer" parent="MainMenuArranger"]
 layout_mode = 2
@@ -89,22 +119,75 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_auiq8")
 
 [node name="TaskBarArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="StarButton" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger"]
+[node name="StarButton" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger" groups=["OnHoverDarkenControl"]]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rnykj")
 
 [node name="StartButtonArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger/StarButton"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="StartIcon" type="TextureRect" parent="MainMenuArranger/TaskBar/TaskBarArranger/StarButton/StartButtonArranger"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("3_vjfqh")
+texture = ExtResource("5_chrp0")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="StartLabel" type="Label" parent="MainMenuArranger/TaskBar/TaskBarArranger/StarButton/StartButtonArranger"]
 layout_mode = 2
-text = "Start"
+text = "start"
+vertical_alignment = 1
+
+[node name="OpenAppsContainer" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0bmgw")
+
+[node name="TimePanel" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cc67v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger/TimePanel"]
+layout_mode = 2
+alignment = 2
+
+[node name="Time" type="Label" parent="MainMenuArranger/TaskBar/TaskBarArranger/TimePanel/HBoxContainer"]
+layout_mode = 2
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeMixerWindow" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eo72t")
+
+[node name="VolumeMixerArranger" type="VBoxContainer" parent="VolumeMixerWindow"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TitleContainer" parent="VolumeMixerWindow/VolumeMixerArranger" node_paths=PackedStringArray("window") instance=ExtResource("6_c6seu")]
+layout_mode = 2
+title = "Volume Mixer"
+window = NodePath("../..")
+
+[node name="Content" type="PanelContainer" parent="VolumeMixerWindow/VolumeMixerArranger"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_41820")
 
 [node name="LEDLayer" parent="." instance=ExtResource("4_4n01m")]

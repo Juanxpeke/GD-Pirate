@@ -16,7 +16,7 @@ const CURSOR_LAYER           : int = 2
 const VFX_LAYER              : int = 3
 
 ## TODO
-const CURSOR_ICON_SIZE : int = 32
+const CURSOR_ICON_SIZE : int = 20
 #endregion Constants
 
 #region Exports Variables

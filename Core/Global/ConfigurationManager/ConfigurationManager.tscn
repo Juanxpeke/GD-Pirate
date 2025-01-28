@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cr75yan34gul1"]
 
-[ext_resource type="Script" path="res://Core/Global/ConfigurationManager.gd" id="1_c8yij"]
-[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_riarj"]
+[ext_resource type="Script" path="res://Core/Global/ConfigurationManager/ConfigurationManager.gd" id="1_qjb1t"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_0femc"]
 
 [node name="ConfigurationManager" type="Node"]
-script = ExtResource("1_c8yij")
-cursor_texture = ExtResource("2_riarj")
+script = ExtResource("1_qjb1t")
+cursor_texture = ExtResource("2_0femc")
 
 [node name="CursorLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

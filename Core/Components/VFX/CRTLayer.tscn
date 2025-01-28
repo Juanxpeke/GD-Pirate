@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://crte4qdqofuyh"]
 
-[ext_resource type="Material" uid="uid://b0x8ue1qm4wlm" path="res://Core/Assets/Materials/ScreenShader/CTRScreenMaterial.tres" id="1_ce675"]
+[ext_resource type="Material" uid="uid://b0x8ue1qm4wlm" path="res://Core/Assets/Materials/ScreenShader/CRTScreenMaterial.tres" id="1_ce675"]
 
 [node name="CTRLayer" type="CanvasLayer" groups=["VFXLayer"]]
 
-[node name="Panelxd" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 material = ExtResource("1_ce675")
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,3 +13,4 @@ offset_left = -3.0
 offset_right = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
