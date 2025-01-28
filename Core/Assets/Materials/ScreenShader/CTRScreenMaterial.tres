@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b0x8ue1qm4wlm"]
+
+[ext_resource type="Shader" path="res://Core/Assets/Materials/ScreenShader/ScreenShader.gdshader" id="1_5p7gh"]
+
+[resource]
+shader = ExtResource("1_5p7gh")
+shader_parameter/curvature = 0.143
+shader_parameter/cutoff_enabled = true
+shader_parameter/scanlines_enabled = true
+shader_parameter/scanlines_dispersion = 0.0
+shader_parameter/vignette_enabled = true
+shader_parameter/vignette_dispersion_exponent = 4.0
+shader_parameter/vignette_intensity = 0.667
