@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xbiqxctethfi"
-path="res://.godot/imported/MainMenuBackground.png-a796e6f57da5549ee0364b73de77b841.ctex"
+uid="uid://couugmwn8iffj"
+path="res://.godot/imported/SebaLogo.jpeg-7b27f63aaf6ebbd9fb20a8359cd81b05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Core/GUI/MainMenuBackground.png"
-dest_files=["res://.godot/imported/MainMenuBackground.png-a796e6f57da5549ee0364b73de77b841.ctex"]
+source_file="res://Core/GUI/MainMenu/Apps/AboutApp/SebaLogo.jpeg"
+dest_files=["res://.godot/imported/SebaLogo.jpeg-7b27f63aaf6ebbd9fb20a8359cd81b05.ctex"]
 
 [params]
 

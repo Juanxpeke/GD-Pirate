@@ -1,0 +1,270 @@
+[gd_scene load_steps=23 format=3 uid="uid://cq6t20p7hm3ba"]
+
+[ext_resource type="FontFile" uid="uid://u17cfwf1qkkm" path="res://Core/Assets/Fonts/m5x7.ttf" id="1_f5uf8"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenu.gd" id="2_js4w1"]
+[ext_resource type="Texture2D" uid="uid://xbiqxctethfi" path="res://Core/GUI/MainMenu/MainMenuBackground.png" id="3_qm2mn"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenuApp.gd" id="3_t24nm"]
+[ext_resource type="Resource" uid="uid://cjclmeipvj3t" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp.tres" id="4_4mot5"]
+[ext_resource type="PackedScene" uid="uid://cfyg86by8ecc7" path="res://Core/GUI/MainMenu/DesktopApp.tscn" id="4_w3ni0"]
+[ext_resource type="Texture2D" uid="uid://buppcnemw6wpx" path="res://Core/GUI/MainMenu/MainMenuLogo.png" id="5_0hsjl"]
+[ext_resource type="PackedScene" uid="uid://1ke48vsgqnju" path="res://Core/GUI/MainMenu/TaskBarApp.tscn" id="6_crkhv"]
+[ext_resource type="PackedScene" uid="uid://bsr8gkntbn0ba" path="res://Core/GUI/MainMenu/WindowApp.tscn" id="7_rx0i0"]
+[ext_resource type="Resource" uid="uid://8vlbbqhqnj68" path="res://Core/GUI/MainMenu/Apps/AboutApp/AboutApp.tres" id="8_podvb"]
+[ext_resource type="PackedScene" uid="uid://jr4iy2jnycmy" path="res://Core/Components/VFX/LEDLayer.tscn" id="8_twmr7"]
+[ext_resource type="Resource" uid="uid://bhad7080jmfxa" path="res://Core/GUI/MainMenu/Apps/PeskyApp/PeskyApp.tres" id="9_fltd2"]
+
+[sub_resource type="Theme" id="Theme_0a3ax"]
+default_font = ExtResource("1_f5uf8")
+default_font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crdci"]
+bg_color = Color(0.952941, 0.941176, 0.866667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gm1p"]
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w4mit"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1507v"]
+bg_color = Color(0.671494, 0.239628, 0.0842103, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjqmo"]
+bg_color = Color(0.898039, 0.356863, 0.172549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auiq8"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnykj"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 32.0
+content_margin_bottom = 4.0
+bg_color = Color(0.141176, 0.0352941, 0.866667, 1)
+border_width_top = 2
+border_color = Color(0.319822, 0.527253, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bmgw"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_top = 3
+border_color = Color(0.411765, 0.603922, 0.980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc67v"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_top = 3
+border_color = Color(0.411765, 0.603922, 0.980392, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0a3ax")
+script = ExtResource("2_js4w1")
+desktop_app_scene = ExtResource("4_w3ni0")
+window_app_scene = ExtResource("7_rx0i0")
+task_bar_app_scene = ExtResource("6_crkhv")
+apps = Array[ExtResource("3_t24nm")]([ExtResource("8_podvb"), ExtResource("4_4mot5"), ExtResource("9_fltd2")])
+
+[node name="MainMenuArranger" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Desktop" type="Control" parent="MainMenuArranger"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DesktopBackground" type="TextureRect" parent="MainMenuArranger/Desktop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("3_qm2mn")
+expand_mode = 1
+
+[node name="DesktopAppsMarginContainer" type="MarginContainer" parent="MainMenuArranger/Desktop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="DesktopAppsContainer" type="GridContainer" parent="MainMenuArranger/Desktop/DesktopAppsMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+
+[node name="StartMenu" type="PanelContainer" parent="MainMenuArranger/Desktop"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -420.0
+offset_right = 360.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_crdci")
+
+[node name="StartMenuArranger" type="VBoxContainer" parent="MainMenuArranger/Desktop/StartMenu"]
+layout_mode = 2
+alignment = 2
+
+[node name="OffButtonContainer" type="PanelContainer" parent="MainMenuArranger/Desktop/StartMenu/StartMenuArranger"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gm1p")
+
+[node name="OffButtonArranger" type="HBoxContainer" parent="MainMenuArranger/Desktop/StartMenu/StartMenuArranger/OffButtonContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="OffButton" type="Button" parent="MainMenuArranger/Desktop/StartMenu/StartMenuArranger/OffButtonContainer/OffButtonArranger"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w4mit")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_1507v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mjqmo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1507v")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mjqmo")
+
+[node name="OffOLabel" type="Label" parent="MainMenuArranger/Desktop/StartMenu/StartMenuArranger/OffButtonContainer/OffButtonArranger/OffButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -16.0
+offset_right = 22.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "o"
+horizontal_alignment = 1
+
+[node name="OffLabel" type="Label" parent="MainMenuArranger/Desktop/StartMenu/StartMenuArranger/OffButtonContainer/OffButtonArranger"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Turn Off
+"
+
+[node name="TaskBar" type="PanelContainer" parent="MainMenuArranger"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_auiq8")
+
+[node name="TaskBarArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StartButton" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger" groups=["OnHoverDarkenControl"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rnykj")
+
+[node name="StartButtonArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger/StartButton"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StartIcon" type="TextureRect" parent="MainMenuArranger/TaskBar/TaskBarArranger/StartButton/StartButtonArranger"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("5_0hsjl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StartLabel" type="Label" parent="MainMenuArranger/TaskBar/TaskBarArranger/StartButton/StartButtonArranger"]
+layout_mode = 2
+text = "start"
+vertical_alignment = 1
+
+[node name="TaskBarApps" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0bmgw")
+
+[node name="TaskBarAppsContainer" type="HBoxContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger/TaskBarApps"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimePanel" type="PanelContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cc67v")
+
+[node name="TimePanelArranger" type="HBoxContainer" parent="MainMenuArranger/TaskBar/TaskBarArranger/TimePanel"]
+layout_mode = 2
+alignment = 2
+
+[node name="TimeLabel" type="Label" parent="MainMenuArranger/TaskBar/TaskBarArranger/TimePanel/TimePanelArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00 AM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeTimer" type="Timer" parent="MainMenuArranger/TaskBar/TaskBarArranger/TimePanel/TimePanelArranger"]
+unique_name_in_owner = true
+wait_time = 12.0
+autostart = true
+
+[node name="WindowAppsContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LEDLayer" parent="." instance=ExtResource("8_twmr7")]

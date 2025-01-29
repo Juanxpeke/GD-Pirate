@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MainMenuApp" load_steps=4 format=3 uid="uid://8vlbbqhqnj68"]
+
+[ext_resource type="PackedScene" uid="uid://c4tnea5k48ben" path="res://Core/GUI/MainMenu/Apps/AboutApp/AboutApp.tscn" id="1_fv7x7"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="1_nnxog"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenuApp.gd" id="2_n2axf"]
+
+[resource]
+script = ExtResource("2_n2axf")
+name = "About"
+icon = ExtResource("1_nnxog")
+content_scene = ExtResource("1_fv7x7")

@@ -5,6 +5,23 @@ extends Node
 #endregion Signals
 
 #region Enums
+## TODO
+enum OperativeSystem {
+	## TODO
+	UNKNOWN,
+	## TODO
+	WINDOWS,
+	## TODO
+	MAC_OS,
+	## TODO
+	LINUX,
+	## TODO
+	ANDROID,
+	## TODO
+	IOS,
+	## TODO
+	WEB,
+}
 #endregion Enums
 
 #region Constants
@@ -59,6 +76,24 @@ func _process(_delta : float) -> void:
 #endregion Built-in Virtual Methods
 
 #region Public Methods
+## Returns the current operative system
+func get_operative_system() -> OperativeSystem:
+	match OS.get_name():
+		"Windows":
+			return OperativeSystem.WINDOWS
+		"macOS":
+			return OperativeSystem.MAC_OS
+		"Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+			return OperativeSystem.LINUX
+		"Android":
+			return OperativeSystem.ANDROID
+		"iOS":
+			return OperativeSystem.IOS
+		"Web":
+			return OperativeSystem.WEB
+		_:
+			return OperativeSystem.UNKNOWN
+
 ## Returns a [Texture2D] with the same content as the given texture, but different
 ## dimensions.
 func get_resized_texture(original_texture : Texture2D, width : int, height : int) -> Texture2D:

@@ -1,5 +1,5 @@
-class_name MainMenu
-extends Control
+class_name MainMenuApp
+extends Resource
 ## Docstring
 
 #region Signals
@@ -12,6 +12,12 @@ extends Control
 #endregion Constants
 
 #region Exports Variables
+## TODO
+@export var name : String = "App Name"
+## TODO
+@export var icon : Texture2D = null
+## TODO
+@export var content_scene : PackedScene = null
 #endregion Exports Variables
 
 #region Public Variables
@@ -24,11 +30,6 @@ extends Control
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
-func _ready() -> void:
-	pass
-
-func _process(delta : float) -> void:
-	pass
 #endregion Built-in Virtual Methods
 
 #region Public Methods

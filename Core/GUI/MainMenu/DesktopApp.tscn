@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfyg86by8ecc7"]
 
-[ext_resource type="Script" path="res://Core/GUI/App.gd" id="1_xmddd"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/DesktopApp.gd" id="1_xmddd"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_x11tb"]
 
-[node name="App" type="VBoxContainer"]
+[node name="DesktopApp" type="VBoxContainer"]
 custom_minimum_size = Vector2(80, 110)
 script = ExtResource("1_xmddd")
 
-[node name="AppIcon" type="TextureRect" parent="."]
+[node name="Icon" type="TextureRect" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -15,13 +15,13 @@ texture = ExtResource("2_x11tb")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AppName" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
 theme_override_font_sizes/font_size = 24
-text = "App Name"
+text = "App Title"
 horizontal_alignment = 1
 autowrap_mode = 3
 max_lines_visible = 2

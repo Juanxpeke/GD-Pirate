@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MainMenuApp" load_steps=3 format=3 uid="uid://cjclmeipvj3t"]
+
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="1_ugnvg"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenuApp.gd" id="2_evln2"]
+
+[resource]
+script = ExtResource("2_evln2")
+name = "Volume Mixer"
+icon = ExtResource("1_ugnvg")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ke48vsgqnju"]
+
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/TaskBarApp.gd" id="1_kjhj5"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_s71vm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8ott"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.223529, 0.501961, 0.956863, 1)
+border_width_left = 1
+border_width_top = 1
+border_color = Color(0.48542, 0.676984, 0.989231, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="TaskBarApp" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8ott")
+script = ExtResource("1_kjhj5")
+
+[node name="TaskBarAppArranger" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="TaskBarAppArranger"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("2_s71vm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="TaskBarAppArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "App Title"

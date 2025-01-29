@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://c4tnea5k48ben"]
+
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/Apps/AboutApp/AboutApp.gd" id="1_ddqck"]
+[ext_resource type="Texture2D" uid="uid://f7ne0lwc26le" path="res://Core/GUI/MainMenu/Apps/AboutApp/JuanLogo.png" id="2_educf"]
+[ext_resource type="Texture2D" uid="uid://couugmwn8iffj" path="res://Core/GUI/MainMenu/Apps/AboutApp/SebaLogo.jpeg" id="3_hds3d"]
+
+[sub_resource type="Theme" id="Theme_11q7q"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Label/colors/font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_buqkr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5rrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7thl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slo50"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_74rns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_agkpt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7vwx6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r00ri"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ms56o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chh8x"]
+
+[node name="AboutApp" type="MarginContainer"]
+custom_minimum_size = Vector2(360, 360)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_11q7q")
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+script = ExtResource("1_ddqck")
+
+[node name="VerticalArranger" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="VerticalArranger"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PreviousPageButton" type="Button" parent="VerticalArranger/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_buqkr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_o5rrq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o7thl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_slo50")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_74rns")
+text = "◀"
+
+[node name="Title" type="Label" parent="VerticalArranger/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Developers"
+horizontal_alignment = 1
+
+[node name="NextPageButton" type="Button" parent="VerticalArranger/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_agkpt")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7vwx6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_r00ri")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ms56o")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_chh8x")
+text = "▶"
+
+[node name="Pages" type="Control" parent="VerticalArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DevelopersPage" type="HBoxContainer" parent="VerticalArranger/Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="JuanData" type="VBoxContainer" parent="VerticalArranger/Pages/DevelopersPage"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="JuanLogo" type="TextureRect" parent="VerticalArranger/Pages/DevelopersPage/JuanData"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("2_educf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="JuanNickname" type="Label" parent="VerticalArranger/Pages/DevelopersPage/JuanData"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Juanxpeke"
+horizontal_alignment = 1
+
+[node name="SebaData" type="VBoxContainer" parent="VerticalArranger/Pages/DevelopersPage"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="SebaLogo" type="TextureRect" parent="VerticalArranger/Pages/DevelopersPage/SebaData"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("3_hds3d")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SebaNickname" type="Label" parent="VerticalArranger/Pages/DevelopersPage/SebaData"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Polarisu"
+horizontal_alignment = 1

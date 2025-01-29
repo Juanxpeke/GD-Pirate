@@ -1,0 +1,180 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsr8gkntbn0ba"]
+
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/WindowApp.gd" id="1_6jmtr"]
+[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_djb2m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eo72t"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0981292, 0.298289, 0.727521, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5cwt"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_top = 2
+border_color = Color(0.411765, 0.603922, 0.980392, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h1br"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l32g3"]
+bg_color = Color(0.0998904, 0.301743, 0.73456, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4itk"]
+bg_color = Color(0.141176, 0.372549, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qiym4"]
+bg_color = Color(0.671494, 0.239628, 0.0842103, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlcmk"]
+bg_color = Color(0.898039, 0.356863, 0.172549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41820"]
+bg_color = Color(0.952941, 0.941176, 0.866667, 1)
+
+[node name="WindowApp" type="PanelContainer"]
+custom_minimum_size = Vector2(320, 160)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eo72t")
+script = ExtResource("1_6jmtr")
+
+[node name="WindowAppArranger" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderContainer" type="PanelContainer" parent="WindowAppArranger"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_w5cwt")
+
+[node name="HeaderArranger" type="HBoxContainer" parent="WindowAppArranger/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeaderIcon" type="TextureRect" parent="WindowAppArranger/HeaderContainer/HeaderArranger"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = ExtResource("2_djb2m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HeaderTitle" type="Label" parent="WindowAppArranger/HeaderContainer/HeaderArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "App Title"
+
+[node name="HeaderButtons" type="HBoxContainer" parent="WindowAppArranger/HeaderContainer/HeaderArranger"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 3
+
+[node name="MinimizeButton" type="Button" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6h1br")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l32g3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r4itk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l32g3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r4itk")
+
+[node name="Minimize_Label" type="Label" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons/MinimizeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -16.0
+offset_right = 22.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "_"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6h1br")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_qiym4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vlcmk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qiym4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vlcmk")
+
+[node name="CloseXLabel" type="Label" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons/CloseButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -16.0
+offset_right = 22.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "x"
+horizontal_alignment = 1
+
+[node name="ContentContainer" type="PanelContainer" parent="WindowAppArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_41820")

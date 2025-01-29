@@ -1,6 +1,6 @@
 @tool
-class_name App
-extends VBoxContainer
+class_name DesktopApp
+extends Control
 ## Docstring
 
 #region Signals
@@ -18,46 +18,51 @@ extends VBoxContainer
 	set(new_title):
 		title = new_title
 		if is_inside_tree():
-			_app_title.text = title
+			_update_title()
 ## TODO
 @export var icon : Texture2D = null:
 	set(new_icon):
 		icon = new_icon
-		if is_inside_tree() and icon:
-			_app_icon.texture = icon
+		if is_inside_tree():
+			_update_icon()
 ## TODO
-@export var window : Control = null
+@export var window_app : WindowApp = null
 #endregion Exports Variables
 
 #region Public Variables
 #endregion Public Variables
 
 #region Private Variables
-var _mouse_in : bool = false
 #endregion Private Variables
 
 #region On Ready Variables
-@onready var _app_icon  : TextureRect = %AppIcon
-@onready var _app_title : Label       = %AppName
+@onready var _app_icon  : TextureRect = %Icon
+@onready var _app_title : Label       = %Title
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
 func _ready() -> void:
-	_app_title.text = title
-	
-	if icon:
-		_app_icon.texture = icon
-		
-	mouse_entered.connect(func(): _mouse_in = true)
-	mouse_exited.connect(func(): _mouse_in = false)
+	_update_title()
+	_update_icon()
 
-func _input(event : InputEvent) -> void:
-	if event.is_action_pressed("left_click") and _mouse_in and window:
-		window.show()
+func _gui_input(event : InputEvent) -> void:
+	if event.is_action_pressed("left_click") and window_app:
+		window_app.open()
 #endregion Built-in Virtual Methods
 
 #region Public Methods
+## TODO
+func update(app : WindowApp) -> void:
+	title = app.title
+	icon = app.icon
+	window_app = app
 #endregion Public Methods
 
 #region Private Methods
+func _update_title() -> void:
+	_app_title.text = title
+
+func _update_icon() -> void:
+	if icon:
+		_app_icon.texture = icon
 #endregion Private Methods

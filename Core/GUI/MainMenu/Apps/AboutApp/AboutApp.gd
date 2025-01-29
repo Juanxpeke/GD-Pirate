@@ -1,4 +1,5 @@
-extends Node
+class_name AboutApp
+extends Control
 ## Docstring
 
 #region Signals
@@ -24,13 +25,10 @@ extends Node
 
 #region Built-in Virtual Methods
 func _ready() -> void:
-	for node in get_tree().get_nodes_in_group("OnHoverDarkenControl"):
-		assert(node is Control)
-		var control_node : Control = node
-		control_node.mouse_entered.connect(func():
-			control_node.modulate = Color(0.8, 0.8, 0.8))
-		control_node.mouse_exited.connect(func():
-			control_node.modulate = Color(1.0, 1.0, 1.0))
+	pass
+
+func _process(delta : float) -> void:
+	pass
 #endregion Built-in Virtual Methods
 
 #region Public Methods
