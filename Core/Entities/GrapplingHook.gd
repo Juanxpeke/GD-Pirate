@@ -44,6 +44,8 @@ const CAMERA_DEFAULT_ZOOM_ACTIVATION_TIME : float = 1.2
 
 #region Public Variables
 ## TODO
+var enabled : bool = true
+## TODO
 var holding : bool = false
 ## TODO
 var holding_point : Vector2 = Vector2.ZERO
@@ -130,7 +132,7 @@ func _physics_process(delta : float) -> void:
 			
 
 func _input(event : InputEvent) -> void:
-	if event.is_action_pressed("left_click") and _ray_cast.is_colliding() and not holding:
+	if enabled and event.is_action_pressed("left_click") and _ray_cast.is_colliding() and not holding:
 		var collision_point := _ray_cast.get_collision_point()
 		
 		if can_hold:

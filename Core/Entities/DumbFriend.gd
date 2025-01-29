@@ -17,7 +17,7 @@ enum BehaviourMode {
 	## TODO
 	STOMP,
 	## TODO
-	RANDOM
+	RANDOM,
 }
 ## TODO
 enum CharacterKey {
@@ -28,11 +28,7 @@ enum CharacterKey {
 	## TODO
 	GO_RIGHT,
 	## TODO
-	JUMP,
-	## TODO
 	STOMP,
-	## TODO
-	CHANGE_WEAPON
 }
 #endregion Enums
 
@@ -63,6 +59,9 @@ const INITIAL_IDLE_TIME : float = 2.0
 const MIN_RANDOM_KEY_TIME : float = 1.0
 ## TODO
 const MAX_RANDOM_KEY_TIME : float = 4.0
+
+## TODO
+const STUN_TIME : float = 2.0
 
 ## TODO
 const CHARACTER_KEYS_DATA = {
@@ -100,8 +99,6 @@ const CHARACTER_KEYS_DATA = {
 		if is_inside_tree():
 			_behaviour_mode_initialization()
 			LogManager.character_log("Behaviour mode set to %s" % behaviour_mode)
-		else:
-			pass
 #endregion Exports Variables
 
 #region Public Variables
@@ -123,12 +120,16 @@ var _character_key : CharacterKey = CharacterKey.NONE:
 			_stomp_area.monitoring = false
 		
 		_character_key = new_character_key
+
+var _stunned : bool = false
 #endregion Private Variables
 
 #region On Ready Variables
-@onready var _stomp_area       : Area2D = %StompArea
-@onready var _random_key_timer : Timer  = %RandomKeyTimer
-@onready var _random_key_label : Label  = %RandomKeyLabel
+@onready var _grappling_hook   : GrapplingHook = %GrapplingHook
+@onready var _stomp_area       : Area2D        = %StompArea
+@onready var _stunnable_area   : Area2D        = %StunnableArea
+@onready var _random_key_timer : Timer         = %RandomKeyTimer
+@onready var _random_key_label : Label         = %RandomKeyLabel
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
@@ -160,11 +161,12 @@ func _physics_process_behaviour() -> void:
 
 func _physics_process_movement(delta : float) -> void:
 	var horizontal_movement_direction = Vector2.ZERO
-	match _character_key:
-		CharacterKey.GO_LEFT:
-			horizontal_movement_direction = Vector2.LEFT
-		CharacterKey.GO_RIGHT:
-			horizontal_movement_direction = Vector2.RIGHT
+	if not _stunned:
+		match _character_key:
+			CharacterKey.GO_LEFT:
+				horizontal_movement_direction = Vector2.LEFT
+			CharacterKey.GO_RIGHT:
+				horizontal_movement_direction = Vector2.RIGHT
 	
 	if is_on_floor():
 		velocity += horizontal_movement_direction * HORIZONTAL_MOVEMENT_ACCELERATION_ON_FLOOR * delta
@@ -177,7 +179,7 @@ func _physics_process_movement(delta : float) -> void:
 	
 	velocity += get_gravity() * delta
 	
-	if _character_key == CharacterKey.STOMP:
+	if _character_key == CharacterKey.STOMP and not _stunned:
 		velocity.x = move_toward(velocity.x, 0.0, delta * STOMP_HORIZONTAL_FRICTION)
 		velocity.y += STOMP_VERTICAL_ACCELERATION * delta
 	
@@ -207,12 +209,30 @@ func _on_stomp_area_shape_entered(body_rid : RID, body : Node2D, _body_shape_ind
 			dumb_tile_map_layer.erase_cell(coords)
 			stomped_tile.emit()
 
+func _on_stunnable_area_shape_entered(body_rid : RID, body : Node2D, _body_shape_index : int, _local_shape_index : int) -> void:
+	if body is DumbTileMapLayer:
+		var dumb_tile_map_layer : DumbTileMapLayer = body
+		
+		var coords := dumb_tile_map_layer.get_coords_for_body_rid(body_rid)
+		
+		var tile_data := dumb_tile_map_layer.get_cell_tile_data(coords)
+		
+		if tile_data.get_custom_data("Can Stun") and not _stunned:
+			_stunned = true
+			_grappling_hook.holding = false
+			_grappling_hook.enabled = false
+			var timer := get_tree().create_timer(STUN_TIME)
+			await timer.timeout
+			_grappling_hook.enabled = true
+			_stunned = false
+
 func _on_random_key_timer_timeout() -> void:
 	_set_random_character_key()
 #endregion Callbacks
 #region Initialization
 func _initial_connections() -> void:
 	_stomp_area.body_shape_entered.connect(_on_stomp_area_shape_entered)
+	_stunnable_area.body_shape_entered.connect(_on_stunnable_area_shape_entered)
 	_random_key_timer.timeout.connect(_on_random_key_timer_timeout)
 
 func _initial_setup() -> void:
@@ -229,7 +249,7 @@ func _behaviour_mode_initialization() -> void:
 			_character_key = CharacterKey.STOMP
 		BehaviourMode.RANDOM:
 			var timer := get_tree().create_timer(INITIAL_IDLE_TIME)
-			await timer.timeout
+			await timer.timeout ## NOTE: This can lead to a bug when multiple initialization
 			_set_random_character_key()
 #endregion Initialization
 

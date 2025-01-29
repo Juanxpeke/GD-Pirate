@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://t22dmgoo0oxx"]
+[gd_scene load_steps=8 format=3 uid="uid://t22dmgoo0oxx"]
 
 [ext_resource type="Script" path="res://Core/Entities/DumbFriend.gd" id="1_sur7k"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_820ae"]
@@ -11,6 +11,10 @@ height = 80.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wkx7"]
 size = Vector2(50, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gyh0c"]
+radius = 17.6
+height = 88.0
 
 [node name="DumbFriend" type="CharacterBody2D"]
 script = ExtResource("1_sur7k")
@@ -29,6 +33,7 @@ texture = ExtResource("2_820ae")
 [node name="GrapplingHookPivot" type="Node2D" parent="."]
 
 [node name="GrapplingHook" parent="GrapplingHookPivot" node_paths=PackedStringArray("character", "pivot", "camera") instance=ExtResource("3_jfa0e")]
+unique_name_in_owner = true
 position = Vector2(30, 0)
 character = NodePath("../..")
 pivot = NodePath("..")
@@ -45,6 +50,12 @@ monitoring = false
 
 [node name="CollisionShape" type="CollisionShape2D" parent="StompArea"]
 shape = SubResource("RectangleShape2D_0wkx7")
+
+[node name="StunnableArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="StunnableArea"]
+shape = SubResource("CapsuleShape2D_gyh0c")
 
 [node name="RandomKeyTimer" type="Timer" parent="."]
 unique_name_in_owner = true
