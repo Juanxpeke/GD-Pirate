@@ -1,16 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://c4tnea5k48ben"]
 
+[ext_resource type="Theme" uid="uid://q7cq7ykeylid" path="res://Core/GUI/MainMenu/Apps/AppTheme.tres" id="1_6tgox"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/Apps/AboutApp/AboutApp.gd" id="1_ddqck"]
 [ext_resource type="Texture2D" uid="uid://f7ne0lwc26le" path="res://Core/GUI/MainMenu/Apps/AboutApp/JuanLogo.png" id="2_educf"]
 [ext_resource type="Texture2D" uid="uid://couugmwn8iffj" path="res://Core/GUI/MainMenu/Apps/AboutApp/SebaLogo.jpeg" id="3_hds3d"]
-
-[sub_resource type="Theme" id="Theme_11q7q"]
-Button/colors/font_color = Color(0, 0, 0, 1)
-Button/colors/font_focus_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Label/colors/font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_buqkr"]
 
@@ -39,7 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_11q7q")
+theme = ExtResource("1_6tgox")
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
@@ -48,6 +41,7 @@ script = ExtResource("1_ddqck")
 
 [node name="VerticalArranger" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 24
 
 [node name="Header" type="HBoxContainer" parent="VerticalArranger"]
 layout_mode = 2
@@ -67,8 +61,9 @@ text = "◀"
 
 [node name="Title" type="Label" parent="VerticalArranger/Header"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-text = "Developers"
+text = "Title"
 horizontal_alignment = 1
 
 [node name="NextPageButton" type="Button" parent="VerticalArranger/Header"]
@@ -82,12 +77,14 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_ms56o")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_chh8x")
 text = "▶"
 
-[node name="Pages" type="Control" parent="VerticalArranger"]
+[node name="PagesContainer" type="Control" parent="VerticalArranger"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 
-[node name="DevelopersPage" type="HBoxContainer" parent="VerticalArranger/Pages"]
+[node name="Developers" type="HBoxContainer" parent="VerticalArranger/PagesContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,38 +95,137 @@ size_flags_vertical = 3
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="JuanData" type="VBoxContainer" parent="VerticalArranger/Pages/DevelopersPage"]
+[node name="JuanData" type="VBoxContainer" parent="VerticalArranger/PagesContainer/Developers"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 16
 
-[node name="JuanLogo" type="TextureRect" parent="VerticalArranger/Pages/DevelopersPage/JuanData"]
+[node name="JuanLogo" type="TextureRect" parent="VerticalArranger/PagesContainer/Developers/JuanData"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_educf")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="JuanNickname" type="Label" parent="VerticalArranger/Pages/DevelopersPage/JuanData"]
+[node name="JuanNickname" type="Label" parent="VerticalArranger/PagesContainer/Developers/JuanData"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Juanxpeke"
 horizontal_alignment = 1
 
-[node name="SebaData" type="VBoxContainer" parent="VerticalArranger/Pages/DevelopersPage"]
+[node name="SebaData" type="VBoxContainer" parent="VerticalArranger/PagesContainer/Developers"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 16
 
-[node name="SebaLogo" type="TextureRect" parent="VerticalArranger/Pages/DevelopersPage/SebaData"]
+[node name="SebaLogo" type="TextureRect" parent="VerticalArranger/PagesContainer/Developers/SebaData"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("3_hds3d")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="SebaNickname" type="Label" parent="VerticalArranger/Pages/DevelopersPage/SebaData"]
+[node name="SebaNickname" type="Label" parent="VerticalArranger/PagesContainer/Developers/SebaData"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Polarisu"
 horizontal_alignment = 1
+
+[node name="Fonts" type="VBoxContainer" parent="VerticalArranger/PagesContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="OSFont" type="VBoxContainer" parent="VerticalArranger/PagesContainer/Fonts"]
+layout_mode = 2
+alignment = 1
+
+[node name="OSFontTitle" type="Label" parent="VerticalArranger/PagesContainer/Fonts/OSFont"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OS Font"
+
+[node name="OSFontLabel" type="Label" parent="VerticalArranger/PagesContainer/Fonts/OSFont"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "m5x7"
+
+[node name="OSFont2" type="VBoxContainer" parent="VerticalArranger/PagesContainer/Fonts"]
+layout_mode = 2
+alignment = 1
+
+[node name="OSFontTitle" type="Label" parent="VerticalArranger/PagesContainer/Fonts/OSFont2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OS Font"
+horizontal_alignment = 1
+
+[node name="OSFontLabel" type="Label" parent="VerticalArranger/PagesContainer/Fonts/OSFont2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "m5x7"
+
+[node name="SFX" type="VBoxContainer" parent="VerticalArranger/PagesContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="UI" type="VBoxContainer" parent="VerticalArranger/PagesContainer/SFX"]
+layout_mode = 2
+alignment = 1
+
+[node name="OSFontTitle" type="Label" parent="VerticalArranger/PagesContainer/SFX/UI"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OS Font"
+
+[node name="OSFontLabel" type="Label" parent="VerticalArranger/PagesContainer/SFX/UI"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "m5x7"
+
+[node name="Hook" type="VBoxContainer" parent="VerticalArranger/PagesContainer/SFX"]
+layout_mode = 2
+alignment = 1
+
+[node name="OSFontTitle" type="Label" parent="VerticalArranger/PagesContainer/SFX/Hook"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OS Font"
+horizontal_alignment = 1
+
+[node name="OSFontLabel" type="Label" parent="VerticalArranger/PagesContainer/SFX/Hook"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "m5x7"
+
+[node name="IDK" type="VBoxContainer" parent="VerticalArranger/PagesContainer/SFX"]
+layout_mode = 2
+alignment = 1
+
+[node name="OSFontTitle" type="Label" parent="VerticalArranger/PagesContainer/SFX/IDK"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OS Font"
+horizontal_alignment = 1
+
+[node name="OSFontLabel" type="Label" parent="VerticalArranger/PagesContainer/SFX/IDK"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "m5x7"

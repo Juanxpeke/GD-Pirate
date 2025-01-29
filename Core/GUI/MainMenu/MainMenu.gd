@@ -49,6 +49,7 @@ func _ready() -> void:
 	
 	_start_menu.hide()
 	
+	gui_input.connect(_on_gui_input)
 	_start_button.gui_input.connect(_on_start_button_gui_input)
 	_off_button.pressed.connect(_on_off_button_pressed)
 	_time_timer.timeout.connect(_on_time_timer_timeout)
@@ -63,6 +64,11 @@ func _assert_time_parameters() -> void:
 	assert(not _time_timer.one_shot)
 #endregion Assertions
 #region Callbacks
+func _on_gui_input(event : InputEvent) -> void:
+	if event.is_action_pressed("left_click"):
+		if _start_menu.visible:
+			_start_menu.hide()
+
 func _on_start_button_gui_input(event : InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		if _start_menu.visible:

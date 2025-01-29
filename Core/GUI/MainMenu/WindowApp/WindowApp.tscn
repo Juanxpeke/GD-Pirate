@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bsr8gkntbn0ba"]
 
-[ext_resource type="Script" path="res://Core/GUI/MainMenu/WindowApp.gd" id="1_6jmtr"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/WindowApp/WindowApp.gd" id="1_6jmtr"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_djb2m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eo72t"]
@@ -84,6 +84,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_eo72t")
 script = ExtResource("1_6jmtr")
 
@@ -92,6 +93,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="HeaderContainer" type="PanelContainer" parent="WindowAppArranger"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_filter = 1
@@ -103,6 +105,7 @@ theme_override_constants/separation = 8
 
 [node name="HeaderIcon" type="TextureRect" parent="WindowAppArranger/HeaderContainer/HeaderArranger"]
 unique_name_in_owner = true
+texture_filter = 2
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 texture = ExtResource("2_djb2m")
@@ -177,4 +180,5 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_41820")

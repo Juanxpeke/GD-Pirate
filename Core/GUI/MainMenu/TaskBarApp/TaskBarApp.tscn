@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://1ke48vsgqnju"]
 
-[ext_resource type="Script" path="res://Core/GUI/MainMenu/TaskBarApp.gd" id="1_kjhj5"]
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/TaskBarApp/TaskBarApp.gd" id="1_kjhj5"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_s71vm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8ott"]
@@ -29,6 +29,7 @@ theme_override_constants/separation = 8
 
 [node name="Icon" type="TextureRect" parent="TaskBarAppArranger"]
 unique_name_in_owner = true
+texture_filter = 2
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 texture = ExtResource("2_s71vm")

@@ -51,6 +51,7 @@ var _mouse_vector_at_hold : Vector2
 #endregion Private Variables
 
 #region On Ready Variables
+@onready var _header_container  : PanelContainer = %HeaderContainer
 @onready var _header_icon       : TextureRect    = %HeaderIcon
 @onready var _header_title      : Label          = %HeaderTitle
 @onready var _minimize_button   : Button         = %MinimizeButton
@@ -64,6 +65,7 @@ func _ready() -> void:
 	_update_icon()
 	_update_content()
 	
+	_header_container.gui_input.connect(_on_header_gui_input)
 	_minimize_button.pressed.connect(func(): minimize())
 	_close_button.pressed.connect(func(): close())
 
@@ -75,13 +77,9 @@ func _process(_delta : float) -> void:
 		else:
 			_holding = false
 
-func _gui_input(event : InputEvent) -> void:
+func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
-		_holding = true
-		_mouse_vector_at_hold = get_viewport().get_mouse_position() - position
 		left_clicked.emit()
-	elif event.is_action_released("left_click"):
-		_holding = false
 #endregion Built-in Virtual Methods
 
 #region Public Methods
@@ -105,6 +103,13 @@ func minimize() -> void:
 #endregion Public Methods
 
 #region Private Methods
+func _on_header_gui_input(event : InputEvent) -> void:
+	if event.is_action_pressed("left_click"):
+		_holding = true
+		_mouse_vector_at_hold = get_viewport().get_mouse_position() - position
+	elif event.is_action_released("left_click"):
+		_holding = false
+
 func _update_title() -> void:
 	_header_title.text = title
 
