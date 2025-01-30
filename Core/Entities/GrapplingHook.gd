@@ -61,8 +61,9 @@ var _default_zoom_needed_time : float = 0.0
 #endregion Private Variables
 
 #region On Ready Variables
+@onready var _sprite   : Sprite2D  = %Sprite
 @onready var _ray_cast : RayCast2D = %RayCast
-@onready var _pointer : Sprite2D = %Pointer
+@onready var _pointer  : Sprite2D  = %Pointer
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
@@ -93,6 +94,13 @@ func _physics_process(delta : float) -> void:
 		var mouse_position := get_global_mouse_position()
 		var mouse_direction := mouse_position - character.global_position
 		pivot.rotation = mouse_direction.angle()
+		
+		if abs(pivot.rotation) > PI / 2:
+			_sprite.flip_v = true
+			character.get_node("Sprite").flip_h = true
+		else:
+			_sprite.flip_v = false
+			character.get_node("Sprite").flip_h = false
 	
 		if _ray_cast.is_colliding():
 			if not _pointer.visible:

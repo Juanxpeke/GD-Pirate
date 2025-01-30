@@ -44,9 +44,9 @@ static var last_scripted_area : ScriptedArea = null
 ## TODO
 @export var enter_dialogue_pool : DialoguePool = null
 ## TODO
-@export var return_dialogue_pool : DialoguePool = preload("res://Core/Map/Elements/ScriptedAreas/Dialogues/DefaultReturnDialoguePool.tres")
+@export var return_dialogue_pool : DialoguePool = preload("res://Core/Map/Elements/ScriptedAreas/ScriptedDialogues/DefaultReturnDialoguePool.tres")
 ## TODO
-@export var skip_dialogue_pool : DialoguePool = preload("res://Core/Map/Elements/ScriptedAreas/Dialogues/DefaultSkipDialoguePool.tres")
+@export var skip_dialogue_pool : DialoguePool = preload("res://Core/Map/Elements/ScriptedAreas/ScriptedDialogues/DefaultSkipDialoguePool.tres")
 #endregion Exports Variables
 
 #region Public Variables

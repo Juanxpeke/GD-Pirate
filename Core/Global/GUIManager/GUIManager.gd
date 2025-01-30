@@ -36,8 +36,9 @@ func _ready() -> void:
 #region Public Methods
 ## TODO
 func show_dialogue(dialogue : Dialogue) -> void:
-	var dialogue_container : DialogueContainer = get_tree().get_first_node_in_group("DialogueContainer")
-	dialogue_container.show_text(dialogue.get_text())
+	var dialogue_container := get_tree().get_first_node_in_group("DialogueContainer")
+	if dialogue_container:
+		dialogue_container.show_text(dialogue.get_text())
 #endregion Public Methods
 
 #region Private Methods

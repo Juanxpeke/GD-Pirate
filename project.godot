@@ -78,4 +78,4 @@ exit={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.617856, 0.645802, 1, 1)
+environment/defaults/default_clear_color=Color(0.0141882, 0, 7.81059e-05, 1)

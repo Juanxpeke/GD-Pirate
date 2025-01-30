@@ -171,6 +171,32 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "m5x7"
 
+[node name="Sprites" type="VBoxContainer" parent="VerticalArranger/PagesContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="GrapplingHookGun" type="VBoxContainer" parent="VerticalArranger/PagesContainer/Sprites"]
+layout_mode = 2
+alignment = 1
+
+[node name="GappleGunTitle" type="Label" parent="VerticalArranger/PagesContainer/Sprites/GrapplingHookGun"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Grapple Gun Base Sprite"
+
+[node name="GrappleGunLabel" type="Label" parent="VerticalArranger/PagesContainer/Sprites/GrapplingHookGun"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "2D Guns - Kay Lousberg"
+
 [node name="SFX" type="VBoxContainer" parent="VerticalArranger/PagesContainer"]
 layout_mode = 1
 anchors_preset = 15
