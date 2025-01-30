@@ -212,9 +212,12 @@ func _on_stomp_area_shape_entered(body_rid : RID, body : Node2D, _body_shape_ind
 		
 		var tile_data := dumb_tile_map_layer.get_cell_tile_data(coords)
 		
-		if tile_data.get_custom_data("Breakable"):
-			dumb_tile_map_layer.erase_cell(coords)
-			stomped_tile.emit()
+		if tile_data:
+			if tile_data.get_custom_data("Breakable"):
+				dumb_tile_map_layer.erase_cell(coords)
+				stomped_tile.emit()
+		else:
+			LogManager.physics_log("Not tile data found at %s" % coords)
 
 func _on_stunnable_area_shape_entered(body_rid : RID, body : Node2D, _body_shape_index : int, _local_shape_index : int) -> void:
 	if body is DumbTileMapLayer:
@@ -224,14 +227,17 @@ func _on_stunnable_area_shape_entered(body_rid : RID, body : Node2D, _body_shape
 		
 		var tile_data := dumb_tile_map_layer.get_cell_tile_data(coords)
 		
-		if tile_data.get_custom_data("Can Stun") and not _stunned:
-			_stunned = true
-			_grappling_hook.holding = false
-			_grappling_hook.enabled = false
-			var timer := get_tree().create_timer(STUN_TIME)
-			await timer.timeout
-			_grappling_hook.enabled = true
-			_stunned = false
+		if tile_data:
+			if tile_data.get_custom_data("Can Stun") and not _stunned:
+				_stunned = true
+				_grappling_hook.holding = false
+				_grappling_hook.enabled = false
+				var timer := get_tree().create_timer(STUN_TIME)
+				await timer.timeout
+				_grappling_hook.enabled = true
+				_stunned = false
+		else:
+			LogManager.physics_log("Not tile data found at %s" % coords)
 
 func _on_random_key_timer_timeout() -> void:
 	_set_random_character_key()

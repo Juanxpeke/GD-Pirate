@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cq6t20p7hm3ba"]
+[gd_scene load_steps=30 format=3 uid="uid://cq6t20p7hm3ba"]
 
 [ext_resource type="FontFile" uid="uid://u17cfwf1qkkm" path="res://Core/Assets/Fonts/m5x7.ttf" id="1_f5uf8"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenu.gd" id="2_js4w1"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://8vlbbqhqnj68" path="res://Core/GUI/MainMenu/Apps/AboutApp/AboutApp.tres" id="8_podvb"]
 [ext_resource type="PackedScene" uid="uid://jr4iy2jnycmy" path="res://Core/Components/VFX/LEDLayer.tscn" id="8_twmr7"]
 [ext_resource type="Resource" uid="uid://bhad7080jmfxa" path="res://Core/GUI/MainMenu/Apps/PeskyApp/PeskyApp.tres" id="9_fltd2"]
+[ext_resource type="Resource" uid="uid://b2uj1xejw34g2" path="res://Core/GUI/MainMenu/Apps/GameApp/GameApp.tres" id="10_kb08s"]
 [ext_resource type="Texture2D" uid="uid://b8vg7qfh1mllt" path="res://Core/GUI/MainMenu/ProfilePicture.png" id="11_8ntha"]
 [ext_resource type="Texture2D" uid="uid://cghlkxhmlhef7" path="res://Core/GUI/MainMenu/OffIcon.png" id="12_32qhh"]
 
@@ -132,7 +133,7 @@ script = ExtResource("2_js4w1")
 desktop_app_scene = ExtResource("4_w3ni0")
 window_app_scene = ExtResource("7_rx0i0")
 task_bar_app_scene = ExtResource("6_crkhv")
-apps = Array[ExtResource("3_t24nm")]([ExtResource("8_podvb"), ExtResource("4_4mot5"), ExtResource("9_fltd2")])
+apps = Array[ExtResource("3_t24nm")]([ExtResource("8_podvb"), ExtResource("4_4mot5"), ExtResource("9_fltd2"), ExtResource("10_kb08s")])
 
 [node name="MainMenuArranger" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -191,6 +192,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_crdci")
 
 [node name="StartMenuArranger" type="VBoxContainer" parent="MainMenuArranger/Desktop/StartMenu"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="ProfileContainer" type="PanelContainer" parent="MainMenuArranger/Desktop/StartMenu/StartMenuArranger"]
 layout_mode = 2
@@ -333,6 +335,17 @@ autostart = true
 
 [node name="WindowAppsContainer" type="Control" parent="."]
 unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FullScreenAppsContainer" type="Control" parent="."]
+unique_name_in_owner = true
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

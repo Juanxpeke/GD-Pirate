@@ -20,6 +20,11 @@ signal left_clicked
 #region Constants
 #endregion Constants
 
+#region Static Variables
+## TODO
+static var active_window_app : WindowApp = null
+#endregion Static Variables
+
 #region Exports Variables
 ## TODO
 @export var title : String = "App Title":
@@ -77,8 +82,13 @@ func _process(_delta : float) -> void:
 		else:
 			_holding = false
 
+func _unhandled_input(event : InputEvent) -> void:
+	if event.is_action_pressed("exit") and active_window_app == self:
+		minimize()
+
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
+		active_window_app = self
 		left_clicked.emit()
 #endregion Built-in Virtual Methods
 
@@ -90,14 +100,28 @@ func update(app : MainMenuApp) -> void:
 	content_scene = app.content_scene
 ## TODO
 func open() -> void:
+	active_window_app = self
+	
+	_content_container.process_mode = Node.PROCESS_MODE_INHERIT
+	
 	show()
 	opened.emit()
 ## TODO
 func close() -> void:
+	assert(active_window_app == self)
+	active_window_app = null
+	
+	_content_container.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	hide()
 	closed.emit()
 ## TODO
 func minimize() -> void:
+	assert(active_window_app == self)
+	active_window_app = null
+	
+	_content_container.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	hide()
 	minimized.emit()
 #endregion Public Methods

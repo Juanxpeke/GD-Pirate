@@ -31,14 +31,15 @@ var _time_minute : int = 50
 #endregion Private Variables
 
 #region On Ready Variables
-@onready var _desktop_apps_container  := %DesktopAppsContainer
-@onready var _window_apps_container   := %WindowAppsContainer
-@onready var _task_bar_apps_container := %TaskBarAppsContainer
-@onready var _start_menu              := %StartMenu
-@onready var _start_button            := %StartButton
-@onready var _off_button              := %OffButton
-@onready var _time_label              := %TimeLabel
-@onready var _time_timer              := %TimeTimer
+@onready var _window_apps_container      := %WindowAppsContainer
+@onready var _full_screen_apps_container := %FullScreenAppsContainer
+@onready var _desktop_apps_container     := %DesktopAppsContainer
+@onready var _task_bar_apps_container    := %TaskBarAppsContainer
+@onready var _start_menu                 := %StartMenu
+@onready var _start_button               := %StartButton
+@onready var _off_button                 := %OffButton
+@onready var _time_label                 := %TimeLabel
+@onready var _time_timer                 := %TimeTimer
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
@@ -90,11 +91,14 @@ func _setup_apps() -> void:
 		var window_app : WindowApp = window_app_scene.instantiate()
 		window_app.update(app)
 		window_app.hide()
-		_window_apps_container.add_child(window_app)
-		
-		var move_front = func(): _window_apps_container.move_child(window_app, -1)
-		window_app.opened.connect(move_front)
-		window_app.left_clicked.connect(move_front)
+		if app.full_screen:
+			_full_screen_apps_container.add_child(window_app)
+		else:
+			_window_apps_container.add_child(window_app)
+			
+			var move_front = func(): _window_apps_container.move_child(window_app, -1)
+			window_app.opened.connect(move_front)
+			window_app.left_clicked.connect(move_front)
 		
 		var desktop_app : DesktopApp = desktop_app_scene.instantiate()
 		desktop_app.update(window_app)

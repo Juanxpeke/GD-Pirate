@@ -18,6 +18,8 @@ extends Resource
 @export var icon : Texture2D = null
 ## TODO
 @export var content_scene : PackedScene = null
+## TODO
+@export var full_screen : bool = false
 #endregion Exports Variables
 
 #region Public Variables
