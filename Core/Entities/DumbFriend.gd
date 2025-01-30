@@ -64,7 +64,7 @@ const MAX_RANDOM_KEY_TIME : float = 4.0
 const STUN_TIME : float = 2.0
 
 ## TODO
-const CHARACTER_KEYS_DATA = {
+const DEFAULT_CHARACTER_KEYS_DATA : Dictionary = {
 	CharacterKey.NONE : {
 		"name": "",
 		"weight": 0.1,
@@ -102,6 +102,9 @@ const CHARACTER_KEYS_DATA = {
 #endregion Exports Variables
 
 #region Public Variables
+## TODO
+var character_keys_data : Dictionary = DEFAULT_CHARACTER_KEYS_DATA
+## TODO
 var follow_target : Vector2 = Vector2.ZERO
 #endregion Public Variables
 
@@ -112,7 +115,7 @@ var _character_keys_pool = [CharacterKey.NONE, CharacterKey.GO_LEFT, CharacterKe
 
 var _character_key : CharacterKey = CharacterKey.NONE:
 	set(new_character_key):
-		_random_key_label.text = CHARACTER_KEYS_DATA[new_character_key].name
+		_random_key_label.text = character_keys_data[new_character_key].name
 		
 		if new_character_key == CharacterKey.STOMP:
 			_stomp_area.monitoring = true
@@ -260,20 +263,20 @@ func _set_random_character_key(exclude_current : bool = true) -> void:
 
 	var pool_keys_total_weight := 0.0
 	for key in pool_copy:
-		pool_keys_total_weight += CHARACTER_KEYS_DATA[key].weight
+		pool_keys_total_weight += character_keys_data[key].weight
 
 	var random_weight := _rng.randf_range(0.0, pool_keys_total_weight)
 	
 	var final_key : CharacterKey
 	for key in pool_copy:
 		final_key = key
-		random_weight -= CHARACTER_KEYS_DATA[key].weight
+		random_weight -= character_keys_data[key].weight
 		if random_weight < 0.0:
 			break
 	
 	_character_key = final_key
 	
-	var min_time : float = CHARACTER_KEYS_DATA[_character_key].min_time
-	var max_time : float = CHARACTER_KEYS_DATA[_character_key].max_time
+	var min_time : float = character_keys_data[_character_key].min_time
+	var max_time : float = character_keys_data[_character_key].max_time
 	_random_key_timer.start(_rng.randf_range(min_time, max_time))
 #endregion Private Methods

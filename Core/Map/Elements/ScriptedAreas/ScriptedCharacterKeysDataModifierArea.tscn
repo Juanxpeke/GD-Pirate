@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3r3ehglny5mh"]
+
+[ext_resource type="Script" path="res://Core/Map/Elements/ScriptedAreas/ScriptedCharacterKeysDataModifierArea.gd" id="1_4om01"]
+
+[node name="ScriptedCharacterKeysDataModifierArea" type="Area2D"]
+monitorable = false
+script = ExtResource("1_4om01")
