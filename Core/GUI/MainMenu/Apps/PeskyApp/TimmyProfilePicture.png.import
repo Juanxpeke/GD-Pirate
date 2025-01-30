@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i5k68dy2fykc"
-path="res://.godot/imported/VolumeMixerLogo.png-7e85f95a147c6928a12cc6518fc9d89a.ctex"
+uid="uid://bst8twpwbfsq0"
+path="res://.godot/imported/TimmyProfilePicture.png-3c9378e608f87b8e226cb84ed7dcb21b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Core/GUI/MainMenu/Apps/VolumeMixer/VolumeMixerLogo.png"
-dest_files=["res://.godot/imported/VolumeMixerLogo.png-7e85f95a147c6928a12cc6518fc9d89a.ctex"]
+source_file="res://Core/GUI/MainMenu/Apps/PeskyApp/TimmyProfilePicture.png"
+dest_files=["res://.godot/imported/TimmyProfilePicture.png-3c9378e608f87b8e226cb84ed7dcb21b.ctex"]
 
 [params]
 

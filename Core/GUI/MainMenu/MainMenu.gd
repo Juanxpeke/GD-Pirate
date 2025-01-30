@@ -109,7 +109,7 @@ func _update_time_label() -> void:
 	_time_minute += 1
 	
 	if _time_minute >= 60:
-		_time_hour   = (_time_hour + 1) % 24
+		_time_hour = (_time_hour + 1) % 24
 		_time_minute = 0
 	
 	var hour  := _time_hour

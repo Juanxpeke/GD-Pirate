@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="MainMenuApp" load_steps=3 format=3 uid="uid://bhad7080jmfxa"]
+[gd_resource type="Resource" script_class="MainMenuApp" load_steps=4 format=3 uid="uid://bhad7080jmfxa"]
 
-[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="1_vc5pf"]
+[ext_resource type="Texture2D" uid="uid://csxy5yic836aq" path="res://Core/GUI/MainMenu/Apps/PeskyApp/PeskyAppLogo.png" id="1_a0lir"]
+[ext_resource type="PackedScene" uid="uid://de0cppgi4j1hs" path="res://Core/GUI/MainMenu/Apps/PeskyApp/PeskyApp.tscn" id="1_osadr"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenuApp.gd" id="2_b03bv"]
 
 [resource]
 script = ExtResource("2_b03bv")
 name = "Pesky"
-icon = ExtResource("1_vc5pf")
+icon = ExtResource("1_a0lir")
+content_scene = ExtResource("1_osadr")

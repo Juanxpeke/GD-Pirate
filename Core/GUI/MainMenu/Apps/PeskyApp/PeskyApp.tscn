@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://de0cppgi4j1hs"]
+
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/Apps/PeskyApp/PeskyApp.gd" id="1_tpgq2"]
+[ext_resource type="Texture2D" uid="uid://bst8twpwbfsq0" path="res://Core/GUI/MainMenu/Apps/PeskyApp/TimmyProfilePicture.png" id="2_yh34y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pvq7"]
+content_margin_left = 128.0
+content_margin_top = 64.0
+content_margin_right = 128.0
+content_margin_bottom = 64.0
+bg_color = Color(0.14902, 0.14902, 0.14902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vcyx"]
+bg_color = Color(0.578965, 0.738542, 0.996273, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxh2n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7scm"]
+bg_color = Color(0.803922, 0.337255, 0.447059, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3v8b"]
+bg_color = Color(0.898039, 0.0705882, 0.137255, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="PeskyApp" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1pvq7")
+script = ExtResource("1_tpgq2")
+
+[node name="PeskyAppArranger" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 36
+
+[node name="CenterLayoutArranger" type="VBoxContainer" parent="PeskyAppArranger"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TimmyProfilePictureContainer" type="PanelContainer" parent="PeskyAppArranger/CenterLayoutArranger"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_4vcyx")
+
+[node name="TimmyProfilePicture" type="TextureRect" parent="PeskyAppArranger/CenterLayoutArranger/TimmyProfilePictureContainer"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_yh34y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CallInformationArranger" type="VBoxContainer" parent="PeskyAppArranger/CenterLayoutArranger"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TimmyNicknameLabel" type="Label" parent="PeskyAppArranger/CenterLayoutArranger/CallInformationArranger"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Timothy McGill"
+horizontal_alignment = 1
+
+[node name="CallTimeLabel" type="Label" parent="PeskyAppArranger/CenterLayoutArranger/CallInformationArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "00 : 00"
+horizontal_alignment = 1
+
+[node name="CallTimer" type="Timer" parent="PeskyAppArranger/CenterLayoutArranger/CallInformationArranger"]
+unique_name_in_owner = true
+autostart = true
+
+[node name="CallButtonsArranger" type="HBoxContainer" parent="PeskyAppArranger"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="MuteButton" type="Button" parent="PeskyAppArranger/CallButtonsArranger"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxh2n")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_w7scm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w7scm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w7scm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w7scm")
+
+[node name="PlusButton" type="Button" parent="PeskyAppArranger/CallButtonsArranger"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxh2n")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_w7scm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w7scm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w7scm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w7scm")
+
+[node name="EndCallButton" type="Button" parent="PeskyAppArranger/CallButtonsArranger"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxh2n")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_h3v8b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h3v8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h3v8b")
+theme_override_styles/normal = SubResource("StyleBoxFlat_h3v8b")
