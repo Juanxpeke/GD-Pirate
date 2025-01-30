@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cq6t20p7hm3ba"]
+[gd_scene load_steps=31 format=3 uid="uid://cq6t20p7hm3ba"]
 
 [ext_resource type="FontFile" uid="uid://u17cfwf1qkkm" path="res://Core/Assets/Fonts/m5x7.ttf" id="1_f5uf8"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/MainMenu.gd" id="2_js4w1"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://b2uj1xejw34g2" path="res://Core/GUI/MainMenu/Apps/GameApp/GameApp.tres" id="10_kb08s"]
 [ext_resource type="Texture2D" uid="uid://b8vg7qfh1mllt" path="res://Core/GUI/MainMenu/ProfilePicture.png" id="11_8ntha"]
 [ext_resource type="Texture2D" uid="uid://cghlkxhmlhef7" path="res://Core/GUI/MainMenu/OffIcon.png" id="12_32qhh"]
+[ext_resource type="PackedScene" uid="uid://c1o2cho4cx2hi" path="res://Core/GUI/MainMenu/DialogueContainer/DialogueContainer.tscn" id="15_6ohwh"]
 
 [sub_resource type="Theme" id="Theme_0a3ax"]
 default_font = ExtResource("1_f5uf8")
@@ -353,5 +354,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="CallContainer" type="Control" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialogueContainer" parent="CallContainer" instance=ExtResource("15_6ohwh")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -88.0
+offset_right = 25.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="LEDLayer" parent="." instance=ExtResource("8_twmr7")]

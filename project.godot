@@ -35,6 +35,7 @@ script/templates_search_path="res://ScriptTemplates"
 
 VFXLayer=""
 OnHoverDarkenControl=""
+DialogueContainer=""
 
 [input]
 

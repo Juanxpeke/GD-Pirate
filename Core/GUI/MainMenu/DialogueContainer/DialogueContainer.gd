@@ -1,4 +1,5 @@
-extends Node
+class_name DialogueContainer
+extends Control
 ## Docstring
 
 #region Signals
@@ -8,6 +9,8 @@ extends Node
 #endregion Enums
 
 #region Constants
+## TODO
+const DEFAULT_DIALOGUE_SCREEN_TIME : float = 2.4
 #endregion Constants
 
 #region Exports Variables
@@ -17,27 +20,30 @@ extends Node
 #endregion Public Variables
 
 #region Private Variables
+var _dialogue_screen_time : float = 0.0
 #endregion Private Variables
 
 #region On Ready Variables
+@onready var _dialogue_label : RichTextLabel = %DialogueLabel
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
 func _ready() -> void:
-	for node in get_tree().get_nodes_in_group("OnHoverDarkenControl"):
-		assert(node is Control)
-		var control_node : Control = node
-		control_node.mouse_entered.connect(func():
-			control_node.modulate = Color(0.8, 0.8, 0.8))
-		control_node.mouse_exited.connect(func():
-			control_node.modulate = Color(1.0, 1.0, 1.0))
+	hide()
+
+func _process(delta : float) -> void:
+	_dialogue_screen_time = max(_dialogue_screen_time - delta, 0.0)
+	
+	if _dialogue_screen_time == 0.0:
+		hide()
 #endregion Built-in Virtual Methods
 
 #region Public Methods
-## TODO
-func show_dialogue(dialogue : Dialogue) -> void:
-	var dialogue_container : DialogueContainer = get_tree().get_first_node_in_group("DialogueContainer")
-	dialogue_container.show_text(dialogue.get_text())
+func show_text(text : String) -> void:
+	_dialogue_label.text = "Timmy: " + text
+	_dialogue_screen_time = DEFAULT_DIALOGUE_SCREEN_TIME
+	
+	show()
 #endregion Public Methods
 
 #region Private Methods

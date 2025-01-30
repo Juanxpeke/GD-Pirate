@@ -23,7 +23,7 @@ size = Vector2(256, 12)
 size = Vector2(224, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8jeq"]
-size = Vector2(128, 80)
+size = Vector2(100, 80)
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_eqeov")
@@ -94,7 +94,7 @@ shape = SubResource("RectangleShape2D_rkrlf")
 position = Vector2(-16, 0)
 
 [node name="ScriptedStompArea" parent="ScriptedAreas" node_paths=PackedStringArray("character", "required_previous_area") instance=ExtResource("6_nq8iw")]
-position = Vector2(416, -164)
+position = Vector2(402, -184)
 character = NodePath("../../DumbFriend")
 required_previous_area = NodePath("../ScriptedMovementArea4")
 

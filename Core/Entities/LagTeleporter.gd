@@ -13,7 +13,12 @@ extends Node2D
 
 #region Exports Variables
 ## TODO
-@export var enabled : bool = false
+@export var enabled : bool = false:
+	set(new_enabled):
+		if is_inside_tree() and not enabled and new_enabled:
+			_lag_animation_timer.start(_rng.randf_range(min_lag_animation_cooldown, max_lag_animation_cooldown))
+		enabled = new_enabled
+
 ## TODO
 @export var character : CharacterBody2D = null
 ## TODO
@@ -77,7 +82,9 @@ func _ready() -> void:
 	_teleport_timer.timeout.connect(_on_teleport_timer_timeout)
 	
 	_record_timer.wait_time = record_delta_time
-	_lag_animation_timer.start(_rng.randf_range(min_lag_animation_cooldown, max_lag_animation_cooldown))
+	
+	if enabled:
+		_lag_animation_timer.start(_rng.randf_range(min_lag_animation_cooldown, max_lag_animation_cooldown))
 #endregion Built-in Virtual Methods
 
 #region Public Methods
@@ -86,9 +93,7 @@ func _ready() -> void:
 #region Private Methods
 #region Callbacks
 func _on_lag_animation_timer_timeout() -> void:
-	assert(not _record_buffer.is_empty())
-	
-	if enabled:
+	if enabled and not _record_buffer.is_empty():
 		if disable_record_on_lag_animation:
 			_record_enabled = false
 		

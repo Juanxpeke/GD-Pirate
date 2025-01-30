@@ -61,25 +61,3 @@ shape = SubResource("CapsuleShape2D_gyh0c")
 [node name="RandomKeyTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="HUDContainer" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/HUDContainer"]
-layout_mode = 0
-offset_left = -127.0
-offset_right = 40.0
-offset_bottom = 82.0
-
-[node name="RandomKeyLabel" type="Label" parent="HUD/HUDContainer/PanelContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1

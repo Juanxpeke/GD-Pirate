@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1o2cho4cx2hi"]
+
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/DialogueContainer/DialogueContainer.gd" id="1_kilxa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joygr"]
+content_margin_left = 16.0
+content_margin_top = 2.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.14902, 0.14902, 0.14902, 1)
+
+[node name="DialogueContainer" type="PanelContainer" groups=["DialogueContainer"]]
+offset_right = 49.0
+offset_bottom = 29.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_joygr")
+script = ExtResource("1_kilxa")
+
+[node name="DialogueLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "Hi
+"
+fit_content = true
+autowrap_mode = 0

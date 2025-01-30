@@ -1,5 +1,5 @@
-class_name Dialogue
-extends Resource
+class_name DialoguePool
+extends Dialogue
 ## Docstring
 
 #region Signals
@@ -13,7 +13,7 @@ extends Resource
 
 #region Exports Variables
 ## TODO
-@export var text : String = ""
+@export var dialogues : Array[DialogueSingle] = []
 #endregion Exports Variables
 
 #region Public Variables
@@ -26,14 +26,16 @@ extends Resource
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods
-func _ready() -> void:
-	pass
 #endregion Built-in Virtual Methods
 
 #region Public Methods
 ## TODO
-func execute() -> void:
-	print(text)
+func get_text() -> String:
+	var random_dialogue_single : DialogueSingle = dialogues.pick_random()
+	if random_dialogue_single:
+		return random_dialogue_single.get_text()
+	else:
+		return ""
 #endregion Public Methods
 
 #region Private Methods

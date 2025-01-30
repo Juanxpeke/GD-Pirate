@@ -115,7 +115,7 @@ var _character_keys_pool = [CharacterKey.NONE, CharacterKey.GO_LEFT, CharacterKe
 
 var _character_key : CharacterKey = CharacterKey.NONE:
 	set(new_character_key):
-		_random_key_label.text = character_keys_data[new_character_key].name
+		## TODO: Call dialogue
 		
 		if new_character_key == CharacterKey.STOMP:
 			_stomp_area.monitoring = true
@@ -133,7 +133,6 @@ var _stunned : bool = false
 @onready var _stomp_area       : Area2D        = %StompArea
 @onready var _stunnable_area   : Area2D        = %StunnableArea
 @onready var _random_key_timer : Timer         = %RandomKeyTimer
-@onready var _random_key_label : Label         = %RandomKeyLabel
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods

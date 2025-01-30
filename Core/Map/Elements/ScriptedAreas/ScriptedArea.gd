@@ -44,9 +44,9 @@ static var last_scripted_area : ScriptedArea = null
 ## TODO
 @export var enter_dialogue_pool : DialoguePool = null
 ## TODO
-@export var return_dialogue_pool : DialoguePool = null
+@export var return_dialogue_pool : DialoguePool = preload("res://Core/Map/Elements/ScriptedAreas/Dialogues/DefaultReturnDialoguePool.tres")
 ## TODO
-@export var skip_dialogue_pool : DialoguePool = null
+@export var skip_dialogue_pool : DialoguePool = preload("res://Core/Map/Elements/ScriptedAreas/Dialogues/DefaultSkipDialoguePool.tres")
 #endregion Exports Variables
 
 #region Public Variables
@@ -117,7 +117,7 @@ func _handle_entering_type(past_scripted_area : ScriptedArea) -> void:
 			if future_area_before_change == self:
 				character_entered.emit(EnteringTypeByOrdering.SKIP)
 				if skip_dialogue_pool:
-					skip_dialogue_pool.execute()
+					GUIManager.show_dialogue(skip_dialogue_pool)
 				LogManager.systems_log("SKIP case executed to area %s" % name)
 				return
 			future_area_before_change = future_area_before_change.next_area
@@ -127,14 +127,14 @@ func _handle_entering_type(past_scripted_area : ScriptedArea) -> void:
 			if future_area_after_change == past_scripted_area:
 				character_entered.emit(EnteringTypeByOrdering.RETURN)
 				if return_dialogue_pool:
-					return_dialogue_pool.execute()
+					GUIManager.show_dialogue(return_dialogue_pool)
 				LogManager.systems_log("RETURN case executed to area %s" % name)
 				return
 			future_area_after_change = future_area_after_change.next_area
 		
 		character_entered.emit(EnteringTypeByOrdering.NONE)
 		if enter_dialogue_pool:
-			enter_dialogue_pool.execute()
+			GUIManager.show_dialogue(enter_dialogue_pool)
 #endregion Private Methods
 
 #region Inner Classes

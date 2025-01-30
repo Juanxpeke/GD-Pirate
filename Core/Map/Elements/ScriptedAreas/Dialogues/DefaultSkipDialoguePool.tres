@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialoguePool" load_steps=5 format=3 uid="uid://cth2uchkrah1g"]
+
+[ext_resource type="Script" path="res://Core/Global/GUIManager/Dialogues/DialogueSingle.gd" id="1_0bddi"]
+[ext_resource type="Script" path="res://Core/Global/GUIManager/Dialogues/DialoguePool.gd" id="2_vl4n6"]
+
+[sub_resource type="Resource" id="Resource_yxupl"]
+script = ExtResource("1_0bddi")
+text = "Nice."
+
+[sub_resource type="Resource" id="Resource_al1ct"]
+script = ExtResource("1_0bddi")
+text = ":D"
+
+[resource]
+script = ExtResource("2_vl4n6")
+dialogues = Array[ExtResource("1_0bddi")]([SubResource("Resource_yxupl"), SubResource("Resource_al1ct")])
