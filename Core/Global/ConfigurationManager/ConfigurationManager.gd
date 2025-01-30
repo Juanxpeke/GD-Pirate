@@ -59,9 +59,12 @@ var _empty_texture : Texture2D = get_transparent_texture(CURSOR_ICON_SIZE, CURSO
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("VFXLayer"):
 		assert(node is CanvasLayer)
-		node.layer = VFX_LAYER
+		if get_operative_system() != OperativeSystem.WEB:
+			node.layer = VFX_LAYER
+		else:
+			node.queue_free()
 	
-	if simulated_cursor:
+	if simulated_cursor and get_operative_system() != OperativeSystem.WEB:
 		_cursor.texture = get_resized_texture(cursor_texture, CURSOR_ICON_SIZE, CURSOR_ICON_SIZE)
 		_cursor_layer.layer = CURSOR_LAYER
 		Input.set_custom_mouse_cursor(_empty_texture, Input.CURSOR_ARROW)
