@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://conh1jyb4v1y"]
+
+[ext_resource type="Script" path="res://Core/Map/Elements/ScriptedAreas/ScriptedLagEnablerArea.gd" id="1_2qut0"]
+
+[node name="ScriptedLagEnablerArea" type="Area2D"]
+monitorable = false
+script = ExtResource("1_2qut0")

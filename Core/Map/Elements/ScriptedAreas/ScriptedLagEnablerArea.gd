@@ -1,4 +1,4 @@
-class_name ScriptedCharacterKeysDataModifierArea
+class_name ScriptedLagEnablerArea
 extends ScriptedArea
 ## Docstring
 
@@ -12,7 +12,6 @@ extends ScriptedArea
 #endregion Constants
 
 #region Exports Variables
-@export var new_character_keys_data : Dictionary = DumbFriend.DEFAULT_CHARACTER_KEYS_DATA
 #endregion Exports Variables
 
 #region Public Variables
@@ -34,9 +33,9 @@ func _ready() -> void:
 
 #region Private Methods
 func _character_entered() -> void:
-	LogManager.systems_log("Character entered keys data modifier area %s" % name)
-	character.character_keys_data = new_character_keys_data
+	LogManager.systems_log("Character entered lag enabler area %s" % name)
+	character.enable_lag_teleporter()
 
 func _character_exited() -> void:
-	LogManager.systems_log("Character exited keys data modifier area %s" % name)
+	LogManager.systems_log("Character exited lag enabler area %s" % name)
 #endregion Private Methods

@@ -129,6 +129,7 @@ var _stunned : bool = false
 
 #region On Ready Variables
 @onready var _grappling_hook   : GrapplingHook = %GrapplingHook
+@onready var _lag_teleporter   : LagTeleporter = %LagTeleporter
 @onready var _stomp_area       : Area2D        = %StompArea
 @onready var _stunnable_area   : Area2D        = %StunnableArea
 @onready var _random_key_timer : Timer         = %RandomKeyTimer
@@ -192,6 +193,9 @@ func _physics_process_movement(delta : float) -> void:
 #endregion Built-in Virtual Methods
 
 #region Public Methods
+## TODO
+func enable_lag_teleporter() -> void:
+	_lag_teleporter.enabled = true
 #endregion Public Methods
 
 #region Private Methods
