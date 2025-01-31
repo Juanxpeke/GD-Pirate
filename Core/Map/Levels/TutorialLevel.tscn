@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://t22dmgoo0oxx" path="res://Core/Entities/DumbFriend.tscn" id="2_pgqd7"]
 [ext_resource type="PackedScene" uid="uid://84qq6jrv5d6p" path="res://Core/Map/TileMap/DumbTileMapLayer.tscn" id="3_gihg5"]
-[ext_resource type="PackedScene" path="res://Core/Map/Elements/ScriptedAreas/ScriptedTeleportArea.tscn" id="4_uuvav"]
+[ext_resource type="PackedScene" uid="uid://chmuocl1bn1mn" path="res://Core/Map/Elements/ScriptedAreas/ScriptedTeleportArea.tscn" id="4_uuvav"]
 [ext_resource type="PackedScene" uid="uid://c6la24do7dga1" path="res://Core/Map/Elements/ScriptedAreas/ScriptedMovementArea.tscn" id="5_ee51r"]
 [ext_resource type="PackedScene" uid="uid://cgqnfn1xhcyia" path="res://Core/Map/Elements/ScriptedAreas/ScriptedStompArea.tscn" id="6_nq8iw"]
 
@@ -51,7 +51,7 @@ func _process(delta : float) -> void:
 size = Vector2(4000, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qswnf"]
-size = Vector2(992, 12)
+size = Vector2(1408, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11xcu"]
 size = Vector2(256, 12)
@@ -88,7 +88,7 @@ shape = SubResource("RectangleShape2D_xlaa3")
 position = Vector2(-509, -204)
 
 [node name="ScriptedMovementArea" parent="ScriptedAreas" node_paths=PackedStringArray("target", "character", "next_area") instance=ExtResource("5_ee51r")]
-position = Vector2(496, 633)
+position = Vector2(641, 633)
 target = NodePath("Target")
 character = NodePath("../../DumbFriend")
 next_area = NodePath("../ScriptedMovementArea2")

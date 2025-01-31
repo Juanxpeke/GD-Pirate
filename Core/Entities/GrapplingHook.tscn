@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Core/Entities/GrapplingHook.gd" id="1_6swxw"]
 [ext_resource type="Texture2D" uid="uid://cfuouvit4qhhw" path="res://Core/Entities/GrapplingHook.png" id="2_4mgt8"]
-[ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_k8dvy"]
 [ext_resource type="Shader" path="res://Core/Entities/GrapplingHook.gdshader" id="3_wf8xg"]
+[ext_resource type="Texture2D" uid="uid://cgk7yf7fy874k" path="res://Core/Entities/Hook.png" id="4_vyobi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76y87"]
 shader = ExtResource("3_wf8xg")
@@ -16,7 +16,7 @@ unique_name_in_owner = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(16.5, -2.5)
+position = Vector2(16.5, 7.5)
 scale = Vector2(0.32, 0.32)
 texture = ExtResource("2_4mgt8")
 
@@ -26,5 +26,5 @@ texture = ExtResource("2_4mgt8")
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_76y87")
 position = Vector2(100, 0)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_k8dvy")
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("4_vyobi")

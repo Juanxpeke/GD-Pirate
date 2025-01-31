@@ -6,6 +6,7 @@
 [node name="ConfigurationManager" type="Node"]
 script = ExtResource("1_qjb1t")
 cursor_texture = ExtResource("2_0femc")
+simulated_cursor = false
 
 [node name="CursorLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

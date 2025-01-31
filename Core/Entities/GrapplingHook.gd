@@ -105,6 +105,7 @@ func _physics_process(delta : float) -> void:
 		if _ray_cast.is_colliding():
 			if not _pointer.visible:
 				_pointer.show()
+			_pointer.rotation = mouse_direction.angle()
 			
 			_pointer.global_position = _ray_cast.get_collision_point()
 		elif _pointer.visible:
