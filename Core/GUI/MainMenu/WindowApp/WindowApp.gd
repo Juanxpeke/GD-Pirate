@@ -5,6 +5,10 @@ extends Control
 
 #region Signals
 ## TODO
+signal activated
+## TODO
+signal deactivated
+## TODO
 signal opened
 ## TODO
 signal closed
@@ -22,7 +26,15 @@ signal left_clicked
 
 #region Static Variables
 ## TODO
-static var active_window_app : WindowApp = null
+static var active_window_app : WindowApp = null:
+	set(new_active_window_app):
+		if active_window_app == new_active_window_app:
+			return
+		if active_window_app != null:
+			active_window_app.deactivated.emit()
+		if new_active_window_app != null:
+			new_active_window_app.activated.emit()
+		active_window_app = new_active_window_app
 #endregion Static Variables
 
 #region Exports Variables
@@ -116,7 +128,6 @@ func close() -> void:
 	closed.emit()
 ## TODO
 func minimize() -> void:
-	assert(active_window_app == self)
 	active_window_app = null
 	
 	_content_container.process_mode = Node.PROCESS_MODE_DISABLED

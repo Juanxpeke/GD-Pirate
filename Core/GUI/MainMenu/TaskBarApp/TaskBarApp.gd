@@ -32,6 +32,10 @@ extends Control
 		window_app = new_window_app
 		if is_inside_tree():
 			_update_window_app()
+## TODO
+@export var normal_style_box : StyleBox
+## TODO
+@export var pressed_style_box : StyleBox
 #endregion Exports Variables
 
 #region Public Variables
@@ -74,6 +78,8 @@ func _update_icon() -> void:
 
 func _update_window_app() -> void:
 	if window_app:
+		window_app.activated.connect(func(): add_theme_stylebox_override("panel", pressed_style_box))
+		window_app.deactivated.connect(func(): add_theme_stylebox_override("panel", normal_style_box))
 		window_app.opened.connect(func(): show())
 		window_app.closed.connect(func(): hide())
 #endregion Private Methods

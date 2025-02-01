@@ -69,6 +69,9 @@ func _on_gui_input(event : InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		if _start_menu.visible:
 			_start_menu.hide()
+		## NOTE: This will work properly because WindowApp mouse filter is set to Stop
+		##       That means, we receive this click only when clicking outside a window
+		WindowApp.active_window_app = null
 
 func _on_start_button_gui_input(event : InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
@@ -97,8 +100,10 @@ func _setup_apps() -> void:
 			_window_apps_container.add_child(window_app)
 			
 			var move_front = func(): _window_apps_container.move_child(window_app, -1)
-			window_app.opened.connect(move_front)
-			window_app.left_clicked.connect(move_front)
+			var hide_start_menu = func(): if _start_menu.visible: _start_menu.hide()
+			
+			window_app.activated.connect(move_front)
+			window_app.left_clicked.connect(hide_start_menu)
 		
 		var desktop_app : DesktopApp = desktop_app_scene.instantiate()
 		desktop_app.update(window_app)

@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfyg86by8ecc7"]
+[gd_scene load_steps=4 format=3 uid="uid://cfyg86by8ecc7"]
 
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/DesktopApp/DesktopApp.gd" id="1_xmddd"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_x11tb"]
 
-[node name="DesktopApp" type="VBoxContainer"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8l0ta"]
+
+[node name="DesktopApp" type="PanelContainer"]
 custom_minimum_size = Vector2(80, 110)
+offset_right = 80.0
+offset_bottom = 134.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8l0ta")
 script = ExtResource("1_xmddd")
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="DesktopAppArranger" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="DesktopAppArranger"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -15,7 +23,7 @@ texture = ExtResource("2_x11tb")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="DesktopAppArranger"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2

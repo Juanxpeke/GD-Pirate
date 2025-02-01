@@ -15,12 +15,12 @@ extends Control
 #endregion Exports Variables
 
 #region Public Variables
+## TODO
 var bus : AudioManager.AudioBus:
 	set(new_bus):
 		bus = new_bus
-		print("%s bus setted to %s" % [name, new_bus])
 		if is_inside_tree():
-			_update_bus_information()
+			_update()
 #endregion Public Variables
 
 #region Private Variables
@@ -38,7 +38,7 @@ var _mute_toggled_callable : Callable
 #region Built-in Virtual Methods
 func _ready() -> void:
 	_assert_slider_parameters()
-	_update_bus_information()
+	_update()
 #endregion Built-in Virtual Methods
 
 #region Public Methods
@@ -50,10 +50,10 @@ func _assert_slider_parameters() -> void:
 	assert(_bus_volume_slider.max_value == 1.0)
 	assert(_bus_volume_slider.step      == 0.1)
 
-func _update_bus_information() -> void:
+func _update() -> void:
 	var bus_value := bus
 	# Name
-	_bus_name.text = AudioManager.get_bus_name(bus)
+	_bus_name.text = AudioManager.get_bus_name(bus) + ":"
 	# Slider
 	_bus_volume_slider.value = AudioManager.get_bus_volume(bus)
 	if not _first_time_updated:
