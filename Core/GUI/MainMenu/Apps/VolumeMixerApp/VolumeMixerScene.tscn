@@ -3,23 +3,22 @@
 [ext_resource type="Theme" uid="uid://q7cq7ykeylid" path="res://Core/GUI/MainMenu/Apps/AppTheme.tres" id="1_7vyfb"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp/VolumeMixerScene.gd" id="2_1g6dc"]
 [ext_resource type="PackedScene" uid="uid://l02wclkd0cxk" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp/BusVolumeContainer.tscn" id="3_xdpac"]
+[ext_resource type="PackedScene" uid="uid://cagdjqovm0yau" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp/BusSeparator.tscn" id="4_ldxst"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rq2hb"]
-
-[node name="VolumeMixerScene" type="PanelContainer"]
+[node name="VolumeMixerScene" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_7vyfb")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rq2hb")
 script = ExtResource("2_1g6dc")
 bus_volume_container_scene = ExtResource("3_xdpac")
+bus_separator_scene = ExtResource("4_ldxst")
 
 [node name="BusesArranger" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 4
+theme_override_constants/separation = 0
 alignment = 1

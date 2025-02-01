@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsr8gkntbn0ba"]
+[gd_scene load_steps=13 format=3 uid="uid://bsr8gkntbn0ba"]
 
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/WindowApp/WindowApp.gd" id="1_6jmtr"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_djb2m"]
+[ext_resource type="Texture2D" uid="uid://buppvthiujhao" path="res://Core/GUI/MainMenu/CloseIcon.png" id="3_7qamj"]
+[ext_resource type="Texture2D" uid="uid://j652c8iq6yqk" path="res://Core/GUI/MainMenu/MinimizeIcon.png" id="3_hlkwa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eo72t"]
 content_margin_left = 4.0
@@ -109,7 +111,6 @@ theme_override_constants/separation = 8
 
 [node name="HeaderIcon" type="TextureRect" parent="WindowAppArranger/HeaderContainer/HeaderArranger"]
 unique_name_in_owner = true
-texture_filter = 2
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 texture = ExtResource("2_djb2m")
@@ -136,22 +137,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l32g3")
 theme_override_styles/hover = SubResource("StyleBoxFlat_r4itk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l32g3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_r4itk")
-
-[node name="Minimize_Label" type="Label" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons/MinimizeButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = -16.0
-offset_right = 22.0
-offset_bottom = 7.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "_"
-horizontal_alignment = 1
+icon = ExtResource("3_hlkwa")
 
 [node name="CloseButton" type="Button" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons"]
 unique_name_in_owner = true
@@ -163,22 +149,8 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_qiym4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_vlcmk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qiym4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vlcmk")
-
-[node name="CloseXLabel" type="Label" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons/CloseButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = -16.0
-offset_right = 22.0
-offset_bottom = 7.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "x"
-horizontal_alignment = 1
+icon = ExtResource("3_7qamj")
+icon_alignment = 1
 
 [node name="ContentContainer" type="PanelContainer" parent="WindowAppArranger"]
 unique_name_in_owner = true

@@ -30,9 +30,9 @@ var _mute_toggled_callable : Callable
 #endregion Private Variables
 
 #region On Ready Variables
-@onready var _bus_name          : Label  = %BusName
-@onready var _bus_volume_slider : Slider = %BusVolumeSlider
-@onready var _bus_mute_button   : Button = %BusMuteButton
+@onready var _bus_name          : Label      = %BusName
+@onready var _bus_volume_slider : Slider     = %BusVolumeSlider
+@onready var _bus_mute_button   : BaseButton = %BusMuteButton
 #endregion On Ready Variables
 
 #region Built-in Virtual Methods

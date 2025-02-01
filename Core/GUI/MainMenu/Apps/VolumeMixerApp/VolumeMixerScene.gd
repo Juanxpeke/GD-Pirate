@@ -12,6 +12,7 @@ extends Control
 
 #region Exports Variables
 @export var bus_volume_container_scene : PackedScene
+@export var bus_separator_scene : PackedScene
 #endregion Exports Variables
 
 #region Public Variables
@@ -26,10 +27,15 @@ extends Control
 
 #region Built-in Virtual Methods
 func _ready() -> void:
+	var bus_index := 0
 	for bus in AudioManager.AudioBus.values():
 		var bus_volume_container : BusVolumeContainer = bus_volume_container_scene.instantiate()
 		bus_volume_container.bus = bus
+		if bus_index != 0:
+			var separator := bus_separator_scene.instantiate()
+			_buses_arranger.add_child(separator)
 		_buses_arranger.add_child(bus_volume_container)
+		bus_index += 1
 #endregion Built-in Virtual Methods
 
 #region Public Methods
