@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://l02wclkd0cxk"]
+
+[ext_resource type="Script" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp/BusVolumeContainer.gd" id="1_qe3tg"]
+[ext_resource type="Texture2D" uid="uid://c82w1c6iaidy1" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp/VolumeMixerGrabber.png" id="1_xk7b7"]
+[ext_resource type="Texture2D" uid="uid://u2132oh5ifsw" path="res://Core/GUI/MainMenu/Apps/VolumeMixerApp/VolumeMixerTick.png" id="2_qkt5h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0lke"]
+content_margin_left = 1.0
+content_margin_right = 3.0
+bg_color = Color(0.996078, 0.996078, 0.996078, 1)
+border_width_left = 1
+border_color = Color(0.596078, 0.592157, 0.580392, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qnhdm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rmmgs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jagle"]
+
+[node name="BusVolumeContainer" type="MarginContainer"]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+script = ExtResource("1_qe3tg")
+
+[node name="BusVolumeArranger" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BusName" type="Label" parent="BusVolumeArranger"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Name"
+horizontal_alignment = 1
+
+[node name="BusVolumeSlider" type="VSlider" parent="BusVolumeArranger"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_icons/grabber = ExtResource("1_xk7b7")
+theme_override_icons/grabber_highlight = ExtResource("1_xk7b7")
+theme_override_icons/tick = ExtResource("2_qkt5h")
+theme_override_styles/slider = SubResource("StyleBoxFlat_r0lke")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_qnhdm")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_rmmgs")
+max_value = 1.0
+step = 0.1
+tick_count = 7
+ticks_on_borders = true
+
+[node name="BusMuteButton" type="Button" parent="BusVolumeArranger"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_jagle")
+toggle_mode = true
+text = "Mute"

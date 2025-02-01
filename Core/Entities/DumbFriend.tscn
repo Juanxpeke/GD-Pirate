@@ -51,6 +51,8 @@ shape = SubResource("RectangleShape2D_0wkx7")
 
 [node name="StunnableArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape2D" parent="StunnableArea"]
 shape = SubResource("CircleShape2D_i7n0n")

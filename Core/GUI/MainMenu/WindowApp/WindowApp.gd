@@ -108,7 +108,6 @@ func open() -> void:
 	opened.emit()
 ## TODO
 func close() -> void:
-	assert(active_window_app == self)
 	active_window_app = null
 	
 	_content_container.process_mode = Node.PROCESS_MODE_DISABLED

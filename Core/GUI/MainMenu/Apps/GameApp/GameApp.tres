@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_6rxvb")
-name = "Game"
+name = "Watt A Team!"
 icon = ExtResource("2_klm0c")
 content_scene = ExtResource("1_vl6bu")
 full_screen = true

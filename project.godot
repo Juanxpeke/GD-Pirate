@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 LogManager="*res://Debugging/Global/LogManager.gd"
 ConfigurationManager="*res://Core/Global/ConfigurationManager/ConfigurationManager.tscn"
+AudioManager="*res://Core/Global/AudioManager/AudioManager.gd"
 GUIManager="*res://Core/Global/GUIManager/GUIManager.gd"
 
 [display]
