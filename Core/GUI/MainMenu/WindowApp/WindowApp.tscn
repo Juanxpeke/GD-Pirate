@@ -1,78 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsr8gkntbn0ba"]
+[gd_scene load_steps=17 format=3 uid="uid://bsr8gkntbn0ba"]
 
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/WindowApp/WindowApp.gd" id="1_6jmtr"]
+[ext_resource type="StyleBox" uid="uid://c1d18ypeslavx" path="res://Core/GUI/MainMenu/WindowApp/WindowAppInactiveStyleBox.tres" id="1_yt3nd"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_djb2m"]
+[ext_resource type="StyleBox" uid="uid://caufeaed04nn7" path="res://Core/GUI/MainMenu/WindowApp/HeaderInactiveStyleBox.tres" id="3_2avke"]
 [ext_resource type="Texture2D" uid="uid://buppvthiujhao" path="res://Core/GUI/MainMenu/CloseIcon.png" id="3_7qamj"]
 [ext_resource type="Texture2D" uid="uid://j652c8iq6yqk" path="res://Core/GUI/MainMenu/MinimizeIcon.png" id="3_hlkwa"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eo72t"]
-content_margin_left = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.141176, 0.372549, 0.866667, 1)
-border_width_left = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.0981292, 0.298289, 0.727521, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5cwt"]
-content_margin_left = 4.0
-content_margin_right = 4.0
-bg_color = Color(0.141176, 0.372549, 0.866667, 1)
-border_width_top = 2
-border_color = Color(0.411765, 0.603922, 0.980392, 1)
+[ext_resource type="StyleBox" uid="uid://ct7ccegrvbf1h" path="res://Core/GUI/MainMenu/WindowApp/WindowAppActiveStyleBox.tres" id="3_mofog"]
+[ext_resource type="StyleBox" uid="uid://bs6losy4yg7wn" path="res://Core/GUI/MainMenu/WindowApp/HeaderActiveStyleBox.tres" id="5_yebo8"]
+[ext_resource type="StyleBox" uid="uid://dasmqi8qkfb7c" path="res://Core/GUI/MainMenu/WindowApp/MinimizeButtonActivePressedStyleBox.tres" id="7_xsxbr"]
+[ext_resource type="StyleBox" uid="uid://djeivt38aa1hx" path="res://Core/GUI/MainMenu/WindowApp/MinimizeButtonActiveNormalStyleBox.tres" id="8_lft1h"]
+[ext_resource type="StyleBox" uid="uid://b2w4t3bdmtfc1" path="res://Core/GUI/MainMenu/WindowApp/MinimizeButtonInactiveStyleBox.tres" id="8_rrr7m"]
+[ext_resource type="StyleBox" uid="uid://clrb68cfeyflu" path="res://Core/GUI/MainMenu/WindowApp/CloseButtonInactiveStyleBox.tres" id="9_epqir"]
+[ext_resource type="StyleBox" uid="uid://brwwffx150q01" path="res://Core/GUI/MainMenu/WindowApp/CloseButtonActivePressedStyleBox.tres" id="11_o8kj1"]
+[ext_resource type="StyleBox" uid="uid://dqidc15bqggwc" path="res://Core/GUI/MainMenu/WindowApp/CloseButtonActiveNormalStyleBox.tres" id="12_vdf7d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h1br"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l32g3"]
-bg_color = Color(0.0998904, 0.301743, 0.73456, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4itk"]
-bg_color = Color(0.141176, 0.372549, 0.866667, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qiym4"]
-bg_color = Color(0.671494, 0.239628, 0.0842103, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlcmk"]
-bg_color = Color(0.898039, 0.356863, 0.172549, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41820"]
 bg_color = Color(0.952941, 0.941176, 0.866667, 1)
@@ -90,8 +33,18 @@ offset_right = 160.0
 offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_eo72t")
+theme_override_styles/panel = ExtResource("1_yt3nd")
 script = ExtResource("1_6jmtr")
+inactive_style_box = ExtResource("1_yt3nd")
+active_style_box = ExtResource("3_mofog")
+header_inactive_style_box = ExtResource("3_2avke")
+header_active_style_box = ExtResource("5_yebo8")
+minimize_button_inactive_style_box = ExtResource("8_rrr7m")
+minimize_button_active_normal_style_box = ExtResource("8_lft1h")
+minimize_button_active_pressed_style_box = ExtResource("7_xsxbr")
+close_button_inactive_style_box = ExtResource("9_epqir")
+close_button_active_normal_style_box = ExtResource("12_vdf7d")
+close_button_active_pressed_style_box = ExtResource("11_o8kj1")
 
 [node name="WindowAppArranger" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -102,7 +55,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_w5cwt")
+theme_override_styles/panel = ExtResource("3_2avke")
 
 [node name="HeaderArranger" type="HBoxContainer" parent="WindowAppArranger/HeaderContainer"]
 layout_mode = 2
@@ -132,10 +85,10 @@ custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6h1br")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l32g3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_r4itk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_l32g3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_r4itk")
+theme_override_styles/hover_pressed = ExtResource("7_xsxbr")
+theme_override_styles/hover = ExtResource("8_lft1h")
+theme_override_styles/pressed = ExtResource("7_xsxbr")
+theme_override_styles/normal = ExtResource("8_lft1h")
 icon = ExtResource("3_hlkwa")
 
 [node name="CloseButton" type="Button" parent="WindowAppArranger/HeaderContainer/HeaderArranger/HeaderButtons"]
@@ -144,10 +97,10 @@ custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6h1br")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_qiym4")
-theme_override_styles/hover = SubResource("StyleBoxFlat_vlcmk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qiym4")
-theme_override_styles/normal = SubResource("StyleBoxFlat_vlcmk")
+theme_override_styles/hover_pressed = ExtResource("11_o8kj1")
+theme_override_styles/hover = ExtResource("12_vdf7d")
+theme_override_styles/pressed = ExtResource("11_o8kj1")
+theme_override_styles/normal = ExtResource("12_vdf7d")
 icon = ExtResource("3_7qamj")
 icon_alignment = 1
 

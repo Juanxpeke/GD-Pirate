@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://1ke48vsgqnju"]
 
-[ext_resource type="StyleBox" uid="uid://dgav2jsre2beb" path="res://Core/GUI/MainMenu/TaskBarApp/TaskBarAppPressedStyleBox.tres" id="1_3hprw"]
-[ext_resource type="StyleBox" uid="uid://cc44tdoktouh3" path="res://Core/GUI/MainMenu/TaskBarApp/TaskBarAppNormalStyleBox.tres" id="1_i4jsx"]
+[ext_resource type="StyleBox" uid="uid://dgav2jsre2beb" path="res://Core/GUI/MainMenu/TaskBarApp/TaskBarAppActiveStyleBox.tres" id="1_3hprw"]
+[ext_resource type="StyleBox" uid="uid://cc44tdoktouh3" path="res://Core/GUI/MainMenu/TaskBarApp/TaskBarAppInactiveStyleBox.tres" id="1_i4jsx"]
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/TaskBarApp/TaskBarApp.gd" id="1_kjhj5"]
 [ext_resource type="Texture2D" uid="uid://ctd8u1stx423v" path="res://icon.svg" id="2_s71vm"]
 
@@ -10,8 +10,8 @@ custom_minimum_size = Vector2(200, 0)
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_i4jsx")
 script = ExtResource("1_kjhj5")
-normal_style_box = ExtResource("1_i4jsx")
-pressed_style_box = ExtResource("1_3hprw")
+inactive_style_box = ExtResource("1_i4jsx")
+active_style_box = ExtResource("1_3hprw")
 
 [node name="TaskBarAppArranger" type="HBoxContainer" parent="."]
 layout_mode = 2

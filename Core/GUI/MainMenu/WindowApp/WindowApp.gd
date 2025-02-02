@@ -1,6 +1,6 @@
 @tool
 class_name WindowApp
-extends Control
+extends PanelContainer
 ## Docstring
 
 #region Signals
@@ -31,9 +31,9 @@ static var active_window_app : WindowApp = null:
 		if active_window_app == new_active_window_app:
 			return
 		if active_window_app != null:
-			active_window_app.deactivated.emit()
+			active_window_app.deactivate()
 		if new_active_window_app != null:
-			new_active_window_app.activated.emit()
+			new_active_window_app.activate()
 		active_window_app = new_active_window_app
 #endregion Static Variables
 
@@ -57,6 +57,26 @@ static var active_window_app : WindowApp = null:
 		content_scene = new_content_scene
 		if is_inside_tree():
 			_update_content()
+## TODO
+@export var inactive_style_box : StyleBox
+## TODO
+@export var active_style_box : StyleBox
+## TODO
+@export var header_inactive_style_box : StyleBox
+## TODO
+@export var header_active_style_box : StyleBox
+## TODO
+@export var minimize_button_inactive_style_box : StyleBox
+## TODO
+@export var minimize_button_active_normal_style_box : StyleBox
+## TODO
+@export var minimize_button_active_pressed_style_box : StyleBox
+## TODO
+@export var close_button_inactive_style_box : StyleBox
+## TODO
+@export var close_button_active_normal_style_box : StyleBox
+## TODO
+@export var close_button_active_pressed_style_box : StyleBox
 #endregion Exports Variables
 
 #region Public Variables
@@ -78,6 +98,8 @@ var _mouse_vector_at_hold : Vector2
 
 #region Built-in Virtual Methods
 func _ready() -> void:
+	_assert_parameters()
+	
 	_update_title()
 	_update_icon()
 	_update_content()
@@ -111,6 +133,32 @@ func update(app : MainMenuApp) -> void:
 	icon = app.icon
 	content_scene = app.content_scene
 ## TODO
+func activate() -> void:
+	add_theme_stylebox_override("panel", active_style_box)
+	_header_container.add_theme_stylebox_override("panel", header_active_style_box)
+	_minimize_button.add_theme_stylebox_override("normal", minimize_button_active_normal_style_box)
+	_minimize_button.add_theme_stylebox_override("hover", minimize_button_active_normal_style_box)
+	_minimize_button.add_theme_stylebox_override("pressed", minimize_button_active_pressed_style_box)
+	_minimize_button.add_theme_stylebox_override("hover_pressed", minimize_button_active_pressed_style_box)
+	_close_button.add_theme_stylebox_override("normal", close_button_active_normal_style_box)
+	_close_button.add_theme_stylebox_override("hover", close_button_active_normal_style_box)
+	_close_button.add_theme_stylebox_override("pressed", close_button_active_pressed_style_box)
+	_close_button.add_theme_stylebox_override("hover_pressed", close_button_active_pressed_style_box)
+	activated.emit()
+## TODO
+func deactivate() -> void:
+	add_theme_stylebox_override("panel", inactive_style_box)
+	_header_container.add_theme_stylebox_override("panel", header_inactive_style_box)
+	_minimize_button.add_theme_stylebox_override("normal", minimize_button_inactive_style_box)
+	_minimize_button.add_theme_stylebox_override("hover", minimize_button_inactive_style_box)
+	_minimize_button.add_theme_stylebox_override("pressed", minimize_button_inactive_style_box)
+	_minimize_button.add_theme_stylebox_override("hover_pressed", minimize_button_inactive_style_box)
+	_close_button.add_theme_stylebox_override("normal", close_button_inactive_style_box)
+	_close_button.add_theme_stylebox_override("hover", close_button_inactive_style_box)
+	_close_button.add_theme_stylebox_override("pressed", close_button_inactive_style_box)
+	_close_button.add_theme_stylebox_override("hover_pressed", close_button_inactive_style_box)
+	deactivated.emit()
+## TODO
 func open() -> void:
 	active_window_app = self
 	
@@ -137,13 +185,27 @@ func minimize() -> void:
 #endregion Public Methods
 
 #region Private Methods
+#region Assertions
+func _assert_parameters() -> void:
+	assert(inactive_style_box)
+	assert(active_style_box)
+	assert(header_inactive_style_box)
+	assert(header_active_style_box)
+	assert(minimize_button_inactive_style_box)
+	assert(minimize_button_active_normal_style_box)
+	assert(minimize_button_active_pressed_style_box)
+	assert(close_button_inactive_style_box)
+	assert(close_button_active_normal_style_box)
+	assert(close_button_active_pressed_style_box)
+#endregion Assertions
+#region Callbacks
 func _on_header_gui_input(event : InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		_holding = true
 		_mouse_vector_at_hold = get_viewport().get_mouse_position() - position
 	elif event.is_action_released("left_click"):
 		_holding = false
-
+#endregion Callbacks
 func _update_title() -> void:
 	_header_title.text = title
 

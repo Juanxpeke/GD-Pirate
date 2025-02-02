@@ -1,6 +1,6 @@
 @tool
 class_name TaskBarApp
-extends Control
+extends PanelContainer
 ## Docstring
 
 #region Signals
@@ -33,9 +33,9 @@ extends Control
 		if is_inside_tree():
 			_update_window_app()
 ## TODO
-@export var normal_style_box : StyleBox
+@export var inactive_style_box : StyleBox
 ## TODO
-@export var pressed_style_box : StyleBox
+@export var active_style_box : StyleBox
 #endregion Exports Variables
 
 #region Public Variables
@@ -51,13 +51,19 @@ extends Control
 
 #region Built-in Virtual Methods
 func _ready() -> void:
+	assert(inactive_style_box)
+	assert(active_style_box)
+	
 	_update_title()
 	_update_icon()
 	_update_window_app()
 
 func _gui_input(event : InputEvent) -> void:
 	if event.is_action_pressed("left_click") and window_app:
-		window_app.open()
+		if WindowApp.active_window_app == window_app:
+			window_app.minimize()
+		else:
+			window_app.open()
 #endregion Built-in Virtual Methods
 
 #region Public Methods
@@ -78,8 +84,8 @@ func _update_icon() -> void:
 
 func _update_window_app() -> void:
 	if window_app:
-		window_app.activated.connect(func(): add_theme_stylebox_override("panel", pressed_style_box))
-		window_app.deactivated.connect(func(): add_theme_stylebox_override("panel", normal_style_box))
+		window_app.activated.connect(func(): add_theme_stylebox_override("panel", active_style_box))
+		window_app.deactivated.connect(func(): add_theme_stylebox_override("panel", inactive_style_box))
 		window_app.opened.connect(func(): show())
 		window_app.closed.connect(func(): hide())
 #endregion Private Methods

@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://de0cppgi4j1hs"]
+[gd_scene load_steps=10 format=3 uid="uid://de0cppgi4j1hs"]
 
 [ext_resource type="Script" path="res://Core/GUI/MainMenu/Apps/PeskyApp/PeskyApp.gd" id="1_tpgq2"]
 [ext_resource type="Texture2D" uid="uid://bst8twpwbfsq0" path="res://Core/GUI/MainMenu/Apps/PeskyApp/TimmyProfilePicture.png" id="2_yh34y"]
+[ext_resource type="Texture2D" uid="uid://bi58llx0nnqhd" path="res://Core/GUI/MainMenu/Apps/PeskyApp/MuteCallIcon.png" id="3_p7f8i"]
+[ext_resource type="Texture2D" uid="uid://dsc7mhy7jioo1" path="res://Core/GUI/MainMenu/Apps/PeskyApp/EndCallIcon.png" id="3_sv7gb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pvq7"]
 content_margin_left = 128.0
@@ -103,6 +105,9 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_w7scm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w7scm")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_w7scm")
 theme_override_styles/normal = SubResource("StyleBoxFlat_w7scm")
+icon = ExtResource("3_p7f8i")
+icon_alignment = 1
+expand_icon = true
 
 [node name="PlusButton" type="Button" parent="PeskyAppArranger/CallButtonsArranger"]
 custom_minimum_size = Vector2(36, 36)
@@ -125,3 +130,6 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_h3v8b")
 theme_override_styles/hover = SubResource("StyleBoxFlat_h3v8b")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_h3v8b")
 theme_override_styles/normal = SubResource("StyleBoxFlat_h3v8b")
+icon = ExtResource("3_sv7gb")
+icon_alignment = 1
+expand_icon = true
